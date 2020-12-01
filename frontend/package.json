@@ -1,0 +1,34 @@
+{
+  "name": "thaumatorium",
+  "version": "0.1.0",
+  "description": "Thaumatorium - frontend",
+  "main": "index.js",
+  "author": "Julian Ng",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve --config webpack.config.js",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^5.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "react-refresh": "^0.8.3",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.1.3",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
