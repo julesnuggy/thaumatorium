@@ -1,0 +1,12 @@
+# intelliJ
+.idea
+*.iws
+*.iml
+*.ipr
+
+# node modules
+node_modules/
+dist/
+
+# logs
+*.log
