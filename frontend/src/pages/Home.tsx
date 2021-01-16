@@ -1,10 +1,12 @@
 import React from 'react';
 
-const Home = () => (
-  <>
-    <h1>Thaumatorium</h1>
-    <h2>A place of magic, wonders and mysteries.</h2>
-  </>
+import styles from './Home.module.scss';
+
+const Home = (): React.FC => (
+  <div className={styles.content}>
+    <p>Welcome to Thaumatorium!</p>
+    <p>We specialise in magical items, weapons, armour, trinkets, and spells.</p>
+  </div>
 )
 
 export default Home;

@@ -1,9 +1,14 @@
 import React from "react";
 import Home from "./pages/Home";
+import Page from "./components/Page";
 
-const App = () => (
+import './App.module.scss';
+
+const App = (): React.FC => (
   <div className="App">
-    <Home />
+    <Page>
+      <Home />
+    </Page>
   </div>
 );
 
