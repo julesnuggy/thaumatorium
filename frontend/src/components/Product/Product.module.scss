@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: 150px 300px;
+  grid-template-rows: auto 200px;
+  grid-template-areas:
+    "title description"
+    "image description";
+  padding: 20px;
+  align-items: center;
+  justify-items: center;
+
+  .title {
+    grid-area: title;
+    font-weight: bold;
+  }
+
+  .image {
+    grid-area: image;
+  }
+
+  .description {
+    grid-area: description;
+    align-self: start;
+    text-align: left;
+  }
+}
