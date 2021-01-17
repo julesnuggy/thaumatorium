@@ -1,23 +1,27 @@
 import React from 'react';
 
+import Icon from "../Icon/Icon";
+
 import styles from './Menu.module.scss';
 
 type props = {
-  image?: string;
+  iconName?: string;
   title: string;
   subtitle: string;
 }
 
-const MenuItem = ({ image, title, subtitle }: props): React.FC => (
+const MenuItem = ({ iconName, title, subtitle }: props): React.FC => (
   <div className={styles.menuItem}>
-    <div className={styles.image}>
-      {image}
+    <div className={styles.icon}>
+      <Icon name={iconName} />
     </div>
-    <div className={styles.title}>
-      {title}
-    </div>
-    <div className={styles.subtitle}>
-      {subtitle}
+    <div className={styles.itemText}>
+      <div className={styles.title}>
+        {title}
+      </div>
+      <div className={styles.subtitle}>
+        {subtitle}
+      </div>
     </div>
   </div>
 );
