@@ -1,6 +1,9 @@
+@import '../constants/colours';
+
 .header {
   padding: 1rem;
   text-align: center;
+  color: $yellow;
 
   .title {
     font-size: 3rem;

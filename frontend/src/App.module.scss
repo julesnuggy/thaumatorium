@@ -1,4 +1,8 @@
+@import './constants/colours';
+
 body {
   margin: 0;
-  padding: 1rem;
+  padding: 0;
+  background-color: $blue-grey;
+  color: $beige;
 }
