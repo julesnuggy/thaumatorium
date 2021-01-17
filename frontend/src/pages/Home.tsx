@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Menu from "../components/Menu/Menu";
 import Page from "../components/Page";
@@ -12,7 +11,6 @@ const Home = (): React.FC => (
       <p>Welcome to Thaumatorium!</p>
       <p>We specialise in magical items, weapons, armour, trinkets, and spells.</p>
       <Menu />
-      <Link to="/test">Test</Link>
     </div>
   </Page>
 )
