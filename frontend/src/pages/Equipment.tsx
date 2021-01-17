@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Page from "../components/Page";
+import Page from "../components/Page/Page";
 
 const Equipment = () => (
-  <Page>
+  <Page title="Equipment">
     <p>
       Equipment
     </p>
