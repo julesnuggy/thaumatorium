@@ -1,0 +1,30 @@
+@import '../../constants/colours';
+
+.menu {
+  margin: 80px 50px;
+
+  .menuItem {
+    display: flex;
+    margin: 0 40px;
+    font-size: 30px;
+
+    .image {
+      width: 60px;
+      height: 60px;
+      border: solid 1px $beige;
+    }
+
+    .title {
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    .subtitle {
+      padding: 15px;
+    }
+
+    & + .menuItem {
+      margin-top: 20px;
+    }
+  }
+}
