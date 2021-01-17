@@ -8,24 +8,28 @@ type props = {
   iconName?: string;
   title: string;
   subtitle: string;
+  isSelected: boolean;
+  onClick: () => void;
 }
 
-const MenuItem = ({ iconName, title, subtitle }: props): React.FC => (
-  <div className={styles.menuItem}>
-    <div className={styles.cursor}>
-      <Icon name="pulsingOrb" />
-    </div>
-    <div className={styles.icon}>
-      <Icon name={iconName} />
-    </div>
-    <div className={styles.itemText}>
-      <div className={styles.title}>
-        {title}
+const MenuItem = ({ iconName, title, subtitle, isSelected, onClick }: props): React.FC =>  (
+    <div className={styles.menuItemContainer}>
+      <div className={styles.cursor}>
+        {isSelected && (<Icon name="pulsingOrb"/>)}
       </div>
-      <div className={styles.subtitle}>
-        {subtitle}
+    <button className={styles.menuItem} onClick={onClick}>
+      <div className={styles.icon}>
+        <Icon name={iconName}/>
       </div>
-    </div>
+      <div className={styles.itemText}>
+        <div className={styles.title}>
+          {title}
+        </div>
+        <div className={styles.subtitle}>
+          {subtitle}
+        </div>
+      </div>
+    </button>
   </div>
 );
 
