@@ -37,10 +37,9 @@ const Menu = (): React.FC => {
   const [ selectedItemIndex, setSelectedItemIndex ] = useState(0);
   const history = useHistory();
 
-  const onClick = (index: number, path: string) => {
-    setSelectedItemIndex(index);
-    history.push(path);
-  };
+  const onFocus = (index: number) => setSelectedItemIndex(index);
+
+  const onClick = (path: string) => history.push(path);
 
   return (
     <div className={styles.menu}>
@@ -50,7 +49,8 @@ const Menu = (): React.FC => {
           title={item.title}
           subtitle={item.subtitle}
           isSelected={selectedItemIndex === index}
-          onClick={() => onClick(index, item.path)}
+          onClick={() => onClick(item.path)}
+          onFocus={() => onFocus(index)}
         />
       ))}
     </div>
