@@ -12,6 +12,9 @@ type props = {
 
 const MenuItem = ({ iconName, title, subtitle }: props): React.FC => (
   <div className={styles.menuItem}>
+    <div className={styles.cursor}>
+      <Icon name="pulsingOrb" />
+    </div>
     <div className={styles.icon}>
       <Icon name={iconName} />
     </div>
