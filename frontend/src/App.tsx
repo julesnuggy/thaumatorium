@@ -1,15 +1,18 @@
 import React from "react";
-import Home from "./pages/Home";
-import Page from "./components/Page";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import './App.module.scss';
+import Home from "./pages/Home";
+
+import './Global.module.scss';
 
 const App = (): React.FC => (
-  <div className="App">
-    <Page>
-      <Home />
-    </Page>
-  </div>
+  <BrowserRouter>
+    <Switch>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
+  </BrowserRouter>
 );
 
 export default App;
