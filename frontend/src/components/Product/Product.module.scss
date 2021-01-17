@@ -1,13 +1,20 @@
+@import '../../constants/colours';
+
 .container {
   display: grid;
   grid-template-columns: 150px 300px;
-  grid-template-rows: auto 200px;
+  grid-template-rows: auto 200px auto;
   grid-template-areas:
     "title description"
-    "image description";
-  padding: 20px;
+    "image description"
+    "stock controls";
+  margin: 10px;
+  padding: 10px;
   align-items: center;
   justify-items: center;
+  border: solid 3px $beige;
+  border-radius: 10px;
+  background-color: $black-opaque;
 
   .title {
     grid-area: title;
@@ -22,5 +29,16 @@
     grid-area: description;
     align-self: start;
     text-align: left;
+  }
+
+  .stock {
+    grid-area: stock;
+  }
+
+  .controls {
+    grid-area: controls;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    text-align: center;
   }
 }

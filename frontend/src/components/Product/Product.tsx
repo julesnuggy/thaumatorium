@@ -21,6 +21,12 @@ const Product = ({ title, imageName, description }: props) => (
     <div className={styles.description}>
       {description}
     </div>
+    <div className={styles.stock}>Stock: ??</div>
+    <div className={styles.controls}>
+      <button>-</button>
+      <div>??</div>
+      <button>+</button>
+    </div>
   </div>
 );
 
