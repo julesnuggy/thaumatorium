@@ -7,6 +7,7 @@
 # node modules
 node_modules/
 dist/
+build/
 
 # logs
 *.log
