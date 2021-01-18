@@ -1,13 +1,12 @@
 import { Product } from '../models/product';
-import { v4 as uuidv4 } from 'uuid';
+import { ProductsRepository } from "../repositories/productsRepository";
 
 export type CreateProductParams = Pick<Product, 'title' | 'description' | 'imageName' | 'stock'>;
 
 export class ProductsService {
-  public createProduct = (params: CreateProductParams): Product => {
-    return {
-      id: uuidv4(),
-      ...params
-    }
+  private service = new ProductsRepository();
+
+  public createProduct = (params: CreateProductParams): Product | void => {
+    return this.service.createProduct(params);
   }
 }
