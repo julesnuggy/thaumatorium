@@ -7,11 +7,14 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/src/server.js",
-    "build": "tsoa spec-and-routes && tsc"
+    "build-routes": "tsoa spec-and-routes && tsc",
+    "build": "yarn run tsc --outDir build --experimentalDecorators"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "tsoa": "^3.5.0",
     "uuid": "^8.3.2"
   },
