@@ -8,11 +8,11 @@ import styles from './Items.module.scss';
 const Items = () => (
   <Page title="Items">
     <div className={styles.productsContainer}>
-      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" />
-      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" />
-      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" />
-      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" />
-      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" />
+      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" stock={10} />
+      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" stock={10} />
+      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" stock={10} />
+      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" stock={10} />
+      <Product title="Potion" imageName="heartPotion" description="Heals 50 health" stock={10} />
     </div>
   </Page>
 );
