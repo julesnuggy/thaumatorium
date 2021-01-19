@@ -6,9 +6,11 @@
   "author": "Julian Ng",
   "license": "MIT",
   "scripts": {
+    "dev": "yarn run rebuild && yarn run compile && yarn run start",
     "start": "node build/src/server.js",
-    "build-routes": "tsoa spec-and-routes && tsc",
-    "build": "yarn run tsc --outDir build --experimentalDecorators"
+    "compile": "tsc --outDir build --experimentalDecorators",
+    "rebuild": "tsoa spec-and-routes",
+    "build": "mkdir build && tsoa routes"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.11",
+    "@types/mysql": "^2.15.17",
     "@types/node": "^14.14.21",
     "@types/uuid": "^8.3.0",
     "typescript": "^4.1.3"

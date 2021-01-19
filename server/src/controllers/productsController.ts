@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   Route,
   SuccessResponse,
@@ -10,6 +11,11 @@ import { ProductsService, CreateProductParams } from "../services/productsServic
 
 @Route('products')
 export class ProductsController extends Controller {
+  @Get()
+  public async getProducts(): Promise<Product[]> {
+    console.log("in controller")
+    return new ProductsService().getProducts();
+  }
 
   @SuccessResponse('200', 'Created')
   @Post()
