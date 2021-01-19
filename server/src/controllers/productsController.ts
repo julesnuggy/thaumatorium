@@ -6,20 +6,19 @@ import {
   Route,
   SuccessResponse,
 } from 'tsoa';
-import { Product } from '../models/product';
-import { ProductsService, CreateProductParams } from "../services/productsService";
+import { IProduct, Product } from '../models/Product';
+import { ProductsService } from "../services/productsService";
 
 @Route('products')
 export class ProductsController extends Controller {
   @Get()
-  public async getProducts(): Promise<Product[]> {
-    console.log("in controller")
+  public async getProducts(): Promise<IProduct[]> {
     return new ProductsService().getProducts();
   }
 
   @SuccessResponse('200', 'Created')
   @Post()
-  public async createProduct(@Body() product: CreateProductParams): Promise<Product|void> {
+  public async createProduct(@Body() product: Product): Promise<IProduct> {
     this.setStatus(200);
     return new ProductsService().createProduct(product);
   }

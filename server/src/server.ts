@@ -1,11 +1,12 @@
 import { app } from './app';
-import { sql } from './db';
+import { initialiseDatabase } from './db';
 
 const port = process.env.PORT || 3001;
 
-sql.connect((error: any) => {
-  if (error) throw error;
-  console.log("Successfully connected to the database.");
-});
+initialiseDatabase()
+  .then(() =>  console.log("Successfully connected to the database."))
+  .catch((err: any) => {
+    throw new Error(err);
+  });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

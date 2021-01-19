@@ -1,17 +1,14 @@
-import { Product } from '../models/product';
+import { IProduct, Product } from '../models/Product';
 import { ProductsRepository } from "../repositories/productsRepository";
-
-export type CreateProductParams = Pick<Product, 'title' | 'description' | 'imageName' | 'stock'>;
 
 export class ProductsService {
   private repository = new ProductsRepository();
 
-  public getProducts = async (): Promise<Product[]>=> {
-    console.log("in service")
+  public getProducts = async (): Promise<IProduct[]>=> {
     return this.repository.getProducts();
   }
 
-  public createProduct = (params: CreateProductParams): Product | void => {
+  public createProduct = (params: Product): Promise<IProduct> => {
     return this.repository.createProduct(params);
   }
 }
