@@ -31,6 +31,12 @@ const menuItems: MenuItemsProps[] = [
     subtitle: "Spellbooks, scrolls and artifacts",
     path: "/magic"
   },
+  {
+    iconName: "spellbook",
+    title: "Archmagistration",
+    subtitle: "Archmages only!",
+    path: "/archmagistration"
+  },
 ];
 
 const Menu = (): React.FC => {
