@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Formik } from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 import Page from '../components/Page/Page';
 import { Product } from "../models/Product";
@@ -22,43 +22,41 @@ const useProductsRequests = () => {
 
 const Archmagistration = () => {
   const { callCreateProduct } = useProductsRequests();
-
+  const titleRef = React.createRef();
   const initialValues: Product = ({ title: '', description: '', imageName: '', stock: 0 })
+
+  const handleSubmit = async (values: Product, { resetForm }) => {
+    await callCreateProduct(values);
+    resetForm();
+    titleRef.current?.focus();
+  }
 
   return (
     <Page title="Archmagistration">
-      <Formik
-        initialValues={initialValues}
-        onSubmit={((values: Product) => callCreateProduct(values))}
-      >
-        {({
-          values,
-          handleChange,
-          handleBlur,
-          handleSubmit
-        }) => (
-          <form className={styles.productForm} title="Add New Product" name="newProduct" onSubmit={handleSubmit}>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {() => (
+          <Form className={styles.productForm} title="Add New Product" name="newProduct">
             <b>Add New Product</b>
             <div className={styles.formItem}>
               <label htmlFor="title">Title</label>
-              <input name="title" title="title" onChange={handleChange} onBlur={handleBlur} value={values.title} />
+              <Field name="title" title="title" innerRef={titleRef} />
             </div>
             <div className={styles.formItem}>
               <label htmlFor="description">Description</label>
-              <input name="description" title="Description" onChange={handleChange} onBlur={handleBlur} value={values.description} />
+              <Field name="description" title="Description" />
             </div>
             <div className={styles.formItem}>
               <label htmlFor="imageName">Image Name</label>
-              <input name="imageName" title="Image Name" onChange={handleChange} onBlur={handleBlur} value={values.imageName} />
+              <Field name="imageName" title="Image Name" />
             </div>
             <div className={styles.formItem}>
               <label htmlFor="stock">Stock</label>
-              <input name="stock" title="Stock" onChange={handleChange} onBlur={handleBlur} value={values.stock} />
+              <Field name="stock" title="Stock" />
             </div>
             <div className={styles.formSubmit}>
               <button type="submit">Submit New Product</button>
             </div>
-          </form>
+          </Form>
         )}
       </Formik>
     </Page>
