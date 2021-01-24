@@ -1,11 +1,13 @@
 import dotenv from "dotenv";
 import { Sequelize } from 'sequelize';
 import { Product } from './models/Product';
+import { User } from './models/User';
 
 dotenv.config();
 
 const syncTables = async () => {
   await Product.sync();
+  await User.sync();
 }
 
 export const sequelize = new Sequelize(
