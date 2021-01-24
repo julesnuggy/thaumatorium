@@ -14,7 +14,7 @@ type MenuItemsProps = {
 
 const menuItems: MenuItemsProps[] = [
   {
-    iconName: "heartPotion",
+    iconName: "healthPotion",
     title: "Items",
     subtitle: "Potions, consumables and throwables",
     path: "/items"
@@ -30,6 +30,12 @@ const menuItems: MenuItemsProps[] = [
     title: "Magic",
     subtitle: "Spellbooks, scrolls and artifacts",
     path: "/magic"
+  },
+  {
+    iconName: "archmage",
+    title: "Archmagistration",
+    subtitle: "Archmages only!",
+    path: "/archmagistration"
   },
 ];
 

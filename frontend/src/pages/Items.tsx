@@ -23,8 +23,14 @@ const Items = () => {
   return (
     <Page title="Items">
       <div className={styles.productsContainer}>
-        {data?.map(product => (
-          <Product title={product.title} imageName={product.imageName} description={product.description} stock={product.stock} />
+        {data?.map((product, idx) => (
+          <Product
+            key={`${product.title}_${idx}`}
+            title={product.title}
+            imageName={product.imageName}
+            description={product.description}
+            stock={product.stock}
+          />
         ))}
       </div>
     </Page>

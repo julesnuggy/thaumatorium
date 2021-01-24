@@ -1,0 +1,15 @@
+.productForm {
+  display: grid;
+  grid-template-columns: 400px;
+  grid-template-rows: auto;
+
+  .formItem {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    padding: 20px 0;
+  }
+
+  .formSubmit {
+    padding: 20px 0;
+  }
+}
