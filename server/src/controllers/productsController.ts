@@ -11,15 +11,17 @@ import { ProductsService } from "../services/productsService";
 
 @Route('products')
 export class ProductsController extends Controller {
+  private service = new ProductsService();
+
   @Get()
   public async getProducts(): Promise<IProduct[]> {
-    return new ProductsService().getProducts();
+    return this.service.getProducts();
   }
 
   @SuccessResponse('200', 'Created')
   @Post()
   public async createProduct(@Body() product: Product): Promise<IProduct> {
     this.setStatus(200);
-    return new ProductsService().createProduct(product);
+    return this.service.createProduct(product);
   }
 }
