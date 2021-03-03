@@ -9,7 +9,7 @@ const commonConfig = {
   password: `${process.env.DB_PASSWORD}`
 };
 
-const connection = mysql.createConnection(commonConfig)
+const connection = mysql.createConnection(commonConfig);
 
 const pool = mysql.createPool({
   ...commonConfig,
@@ -25,20 +25,54 @@ const verifyDatabaseExists = async (pool: Pool) => {
   try {
     await pool.promise().query("SELECT 1");
   } catch (err) {
-    throw new Error (`There was an issue verifying the database:\n${err}`);
+    throw new Error(`There was an issue verifying the database:\n${err}`);
   }
-}
+};
 
 const initialiseDatabase = async (connection: Connection, databaseName: string) => {
   try {
     await connection.promise().execute(`CREATE DATABASE IF NOT EXISTS ${databaseName}`);
     console.log(`Verification for database [${databaseName}] completed`);
   } catch (err) {
-    throw new Error (`There was an issue creating the database [${databaseName}]:\n${err}`);
+    throw new Error(`There was an issue creating the database [${databaseName}]:\n${err}`);
+  }
+};
+
+const createProductsTable = `
+  CREATE TABLE IF NOT EXISTS products
+  (
+    id          INT          not null auto_increment,
+    title       VARCHAR(255) not null,
+    description VARCHAR(255),
+    imageName   VARCHAR(255),
+    stock       INT,
+    PRIMARY KEY (id)
+  );
+`;
+
+const createUsersTable = `
+  CREATE TABLE IF NOT EXISTS users
+  (
+    id       INT          not null auto_increment,
+    username VARCHAR(255) not null,
+    password VARCHAR(255),
+    PRIMARY KEY (id)
+  );
+`;
+
+
+const initialiseTables = async () => {
+  try {
+    await promisePool.execute(createProductsTable).catch(err => console.log(err));
+    await promisePool.execute(createUsersTable).catch(err => console.log(err));
+    console.log("Validated database tables.");
+  } catch (err) {
+    throw new Error(`There was an issue validating the DB tables:\n${err}`);
   }
 };
 
 export const getDatabasePool = async () => {
   await initialiseDatabase(connection, process.env.DB_NAME || "thaum_test");
+  await initialiseTables();
   await verifyDatabaseExists(pool);
-}
+};
