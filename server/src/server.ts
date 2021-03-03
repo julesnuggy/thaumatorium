@@ -1,9 +1,9 @@
 import { app } from './app';
-import { initialiseDatabase } from './db';
+import { getDatabasePool } from './db';
 
 const port = process.env.PORT || 3001;
 
-initialiseDatabase()
+getDatabasePool()
   .then(() =>  console.log("Successfully connected to the database."))
   .catch((err: any) => {
     throw new Error(err);
