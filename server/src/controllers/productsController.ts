@@ -15,7 +15,6 @@ export class ProductsController extends Controller {
 
   @Get()
   public async getProducts(): Promise<ProductResponse[]> {
-    console.log("Getting products...")
     return this.service.getProducts();
   }
 
