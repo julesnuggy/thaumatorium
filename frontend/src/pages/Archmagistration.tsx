@@ -2,13 +2,13 @@ import React, { useCallback } from "react";
 
 import Page from '../components/Page/Page';
 import { Product } from "../models/Product";
-import { createProduct } from "../services/servatorium";
+import { productApis } from "../services/servatorium";
 import { useRequestState } from "../utils/hooksUtils";
 import { NewProductForm } from "../components/Forms/NewProductForm";
 import { NewUserForm } from "../components/Forms/NewUserForm";
 
 const useProductsRequests = () => {
-  const callCreateProduct = useCallback((product: Product) =>  createProduct(product), []);
+  const callCreateProduct = useCallback((product: Product) =>  productApis.createProduct(product), []);
   const { loading, data, error } = useRequestState(callCreateProduct)
 
   return {
