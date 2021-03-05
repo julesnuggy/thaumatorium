@@ -5,15 +5,16 @@ import { Product } from "../../models/Product";
 import styles from './forms-common.module.scss';
 
 type FormProps = {
-  onSubmit: (values: Product, { resetForm }) => void;
+  onSubmit: (values: Product) => void;
 }
 
 export const NewProductForm = ({ onSubmit }: FormProps) => {
   const titleRef = React.createRef();
   const initialValues: Product = ({ title: '', description: '', imageName: '', stock: 0 });
 
-  const handleSubmit = (values: Product, { resetForm }) => {
-    onSubmit(values, resetForm);
+  const handleSubmit = async (values: Product, { resetForm }) => {
+    await onSubmit(values);
+    resetForm();
     titleRef.current?.focus();
   };
 

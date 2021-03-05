@@ -24,9 +24,8 @@ const Archmagistration = () => {
 
   const onSubmitUser = async () => {};
 
-  const onSubmitProduct = async (values: Product, { resetForm }) => {
+  const onSubmitProduct = async (values: Product) => {
     await callCreateProduct(values);
-    resetForm();
   }
 
   return (

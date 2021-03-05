@@ -5,15 +5,16 @@ import { User } from "../../models/User";
 import styles from './forms-common.module.scss';
 
 type FormProps = {
-  onSubmit: (values: User, { resetForm }) => void;
+  onSubmit: (values: User) => void;
 }
 
 export const NewUserForm = ({ onSubmit }: FormProps) => {
   const usernameRef = React.createRef();
   const initialValues: User = ({ username: '', password: '' });
 
-  const handleSubmit = (values: User, { resetForm }) => {
-    onSubmit(values, resetForm);
+  const handleSubmit = async (values: User, { resetForm }) => {
+    await onSubmit(values);
+    resetForm();
     usernameRef.current?.focus();
   };
 
