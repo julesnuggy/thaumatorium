@@ -1,9 +1,5 @@
-import axios from 'axios';
-import { Product, ProductResponse } from "../models/Product";
-
-const client = axios.create({
-  baseURL: 'http://localhost:3001'
-})
+import { client } from './axiosClient';
+import { Product, ProductResponse } from '../models/Product';
 
 export const productsUrl = '/products';
 
