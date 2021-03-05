@@ -53,7 +53,7 @@ const createProductsTable = `
 const createUsersTable = `
   CREATE TABLE IF NOT EXISTS users
   (
-    id       INT          not null auto_increment,
+    id       VARCHAR(36)  not null unique,
     username VARCHAR(255) not null,
     password VARCHAR(255),
     PRIMARY KEY (id)
