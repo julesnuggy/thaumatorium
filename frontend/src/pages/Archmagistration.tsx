@@ -5,6 +5,7 @@ import { Product } from "../models/Product";
 import { createProduct } from "../services/servatorium";
 import { useRequestState } from "../utils/hooksUtils";
 import { NewProductForm } from "../components/Forms/NewProductForm";
+import { NewUserForm } from "../components/Forms/NewUserForm";
 
 const useProductsRequests = () => {
   const callCreateProduct = useCallback((product: Product) =>  createProduct(product), []);
@@ -21,6 +22,8 @@ const useProductsRequests = () => {
 const Archmagistration = () => {
   const { callCreateProduct } = useProductsRequests();
 
+  const onSubmitUser = async () => {};
+
   const onSubmitProduct = async (values: Product, { resetForm }) => {
     await callCreateProduct(values);
     resetForm();
@@ -28,6 +31,8 @@ const Archmagistration = () => {
 
   return (
     <Page title="Archmagistration">
+      <NewUserForm onSubmit={onSubmitUser} />
+      <hr />
       <NewProductForm onSubmit={onSubmitProduct} />
     </Page>
   )
