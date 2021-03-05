@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, Form, Formik } from "formik";
-import { User } from "../../models/User";
+import { User, UserFormValues } from "../../models/User";
 
 import styles from './forms-common.module.scss';
 
@@ -10,10 +10,23 @@ type FormProps = {
 
 export const NewUserForm = ({ onSubmit }: FormProps) => {
   const usernameRef = React.createRef();
-  const initialValues: User = ({ username: '', password: '' });
+  const passwordRef = React.createRef();
+  const initialValues: UserFormValues = ({ username: '', password: '', passwordConfirmation: '' });
 
-  const handleSubmit = async (values: User, { resetForm }) => {
-    await onSubmit(values);
+  const handleSubmit = async (values: UserFormValues, { resetForm }) => {
+    const { username, password, passwordConfirmation } = values;
+
+    if (password !== passwordConfirmation) {
+      alert('Passwords do not match!');
+      return passwordRef.current?.focus();
+    }
+
+    const newUser: User = {
+      username,
+      password
+    };
+
+    await onSubmit(newUser);
     resetForm();
     usernameRef.current?.focus();
   };
@@ -29,7 +42,7 @@ export const NewUserForm = ({ onSubmit }: FormProps) => {
           </div>
           <div className={styles.formItem}>
             <label htmlFor="password">Password</label>
-            <Field name="password" title="password" />
+            <Field name="password" title="password" innerRef={passwordRef} />
           </div>
           <div className={styles.formItem}>
             <label htmlFor="passwordConfirmation">Confirm Password</label>
