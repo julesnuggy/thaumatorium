@@ -18,7 +18,7 @@ export const NewUserForm = ({ onSubmit }: FormProps) => {
 
     if (password !== passwordConfirmation) {
       alert('Passwords do not match!');
-      return passwordRef.current?.focus();
+      return passwordRef.current?.select();
     }
 
     const newUser: User = {
