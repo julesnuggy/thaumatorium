@@ -3,12 +3,12 @@ import { promisePool } from '../db'
 
 export class UsersRepository {
   public getUsers = async (): Promise<UserResponse[]> => {
-    const [rows] = await promisePool.query('SELECT * FROM users');
+    const [rows] = await promisePool.query('SELECT id, username FROM users');
     return rows as UserResponse[];
   }
 
   public getUserByUsername = async (username: string): Promise<UserResponse> => {
-    const [rows]: any = await promisePool.query('SELECT * FROM users WHERE username = ? LIMIT 1', [username])
+    const [rows]: any = await promisePool.query('SELECT id, username FROM users WHERE username = ? LIMIT 1', [username])
     if (rows.length < 1) {
       throw new Error('User with that username was not found');
     }

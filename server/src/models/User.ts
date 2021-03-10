@@ -1,19 +1,20 @@
-export interface IUser {
+export type UserRequest = {
   username: string;
   password: string;
 }
 
-export interface UserRequest extends IUser {}
-
-export interface UserResponse extends IUser {
+export type UserResponse = {
   id: string;
+  username: string;
 }
 
-export type UserType = IUser & {
+export type UserType = {
   id: string;
+  username: string;
+  password: string;
 }
 
-export class User implements IUser {
+export class User implements UserType {
   public id!: string;
   public username!: string;
   public password!: string;
