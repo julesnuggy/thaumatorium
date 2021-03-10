@@ -1,6 +1,7 @@
 import { v4 as UUID } from 'uuid';
 import { User, UserRequest, UserResponse } from '../models/User';
 import { UsersRepository } from '../repositories/usersRepository';
+import { hashPassword } from '../utils/encryptionHandler';
 
 export class UsersService {
   private repository = new UsersRepository();
@@ -13,12 +14,13 @@ export class UsersService {
     return this.repository.getUserByUsername(username);
   }
 
-  public createUser = (params: UserRequest): Promise<void> => {
+  public createUser = async (params: UserRequest): Promise<void> => {
     const { username, password } = params;
+    const hashedPassword = await hashPassword(password);
     const userProperties = {
       id: UUID(),
       username,
-      password
+      password: hashedPassword
     }
     const user = new User(userProperties)
 
