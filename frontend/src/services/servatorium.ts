@@ -1,5 +1,5 @@
 import { getProducts, createProduct } from './productService';
-import { createUser } from './userService'
+import { getUsers, getUserByUsername, createUser } from './userService'
 
 export const productApis = { getProducts, createProduct };
-export const userApis = { createUser };
+export const userApis = { getUsers, getUserByUsername, createUser };

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Page from '../components/Page/Page';
 import { Product } from "../models/Product";
@@ -22,19 +22,53 @@ const useProductsRequests = () => {
 
 const userUsersRequests = () => {
   const callCreateUser = useCallback((user: User) =>  userApis.createUser(user), []);
+  const callGetUsers = useCallback(() => userApis.getUsers(), []);
+  const callGetUserByUsername = useCallback((username: string) => userApis.getUserByUsername(username), []);
   const { loading, data, error } = useRequestState(callCreateUser)
 
   return {
     callCreateUser,
+    callGetUsers,
+    callGetUserByUsername,
     loading,
     data,
     error
   };
 }
 
+type UsersTableProps = {
+  users: User[];
+}
+
+const UsersTable = ({ users }: UsersTableProps) => {
+  const hasUsers = users.length > 0;
+  return (
+    <table>
+      <thead>
+        <th>User ID</th>
+        <th>Username</th>
+      </thead>
+      <tbody>
+        {hasUsers && users.map((user: User) => (
+          <tr>
+            <td>{user.id}</td>
+            <td>{user.username}</td>
+          </tr>
+        ))}
+        {!hasUsers && <td colSpan={2}>No Users to Display</td>}
+      </tbody>
+    </table>
+  );
+}
+
 const Archmagistration = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const { callCreateProduct } = useProductsRequests();
-  const { callCreateUser } = userUsersRequests();
+  const { callCreateUser, callGetUsers, callGetUserByUsername } = userUsersRequests();
+
+  useEffect(() => {
+    callGetUsers().then((res) => setUsers(res));
+  }, [setUsers])
 
   const onSubmitUser = async (values: User) => {
     await callCreateUser(values);
@@ -47,6 +81,7 @@ const Archmagistration = () => {
   return (
     <Page title="Archmagistration">
       <NewUserForm onSubmit={onSubmitUser} />
+      <UsersTable users={users}/>
       <hr />
       <NewProductForm onSubmit={onSubmitProduct} />
     </Page>
