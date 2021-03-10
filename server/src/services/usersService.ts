@@ -9,6 +9,10 @@ export class UsersService {
     return this.repository.getUsers();
   }
 
+  public getUserByUsername = (username: string): Promise<UserResponse> => {
+    return this.repository.getUserByUsername(username);
+  }
+
   public createUser = (params: UserRequest): Promise<void> => {
     const { username, password } = params;
     const userProperties = {

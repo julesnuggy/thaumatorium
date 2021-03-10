@@ -1,12 +1,13 @@
 import {
   Body,
+  Path,
   Controller,
   Get,
   Post,
   Route,
   SuccessResponse,
 } from 'tsoa';
-import { UserRequest, UserResponse } from "../models/User";
+import { UserRequest, UserResponse } from '../models/User';
 import { UsersService } from '../services/usersService';
 
 @Route('users')
@@ -16,6 +17,11 @@ export class UsersController extends Controller {
   @Get()
   public async getUsers(): Promise<UserResponse[]> {
     return this.service.getUsers();
+  }
+
+  @Get('{username}')
+  public async getUserByUsername(@Path() username: string): Promise<UserResponse> {
+    return this.service.getUserByUsername(username);
   }
 
   @SuccessResponse('200', 'Created')
