@@ -6,6 +6,7 @@ import Items from "./pages/Items";
 import Equipment from "./pages/Equipment";
 import Magic from "./pages/Magic";
 import Archmagistration from "./pages/Archmagistration";
+import Login from "./pages/Login";
 
 import './Global.module.scss';
 
@@ -26,6 +27,9 @@ const App = (): React.FC => (
       </Route>
       <Route path="/archmagistration">
         <Archmagistration />
+      </Route>
+      <Route path="/login">
+        <Login />
       </Route>
     </Switch>
   </BrowserRouter>

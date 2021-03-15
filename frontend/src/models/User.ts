@@ -7,3 +7,5 @@ export type User = {
 export type UserFormValues = User & {
   passwordConfirmation: string;
 }
+
+export type UserLoginFormValues = User;
