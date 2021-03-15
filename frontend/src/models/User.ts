@@ -1,11 +1,14 @@
-export type User = {
-  id?: string;
+type UserBase = {
   username: string;
   password: string;
+};
+
+export type User = UserBase & {
+  id?: string;
 }
 
-export type UserFormValues = User & {
+export type UserFormValues = UserBase & {
   passwordConfirmation: string;
 }
 
-export type UserLoginFormValues = User;
+export type UserLoginFormValues = UserBase;
