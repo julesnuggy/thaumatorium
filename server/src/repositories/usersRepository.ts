@@ -18,7 +18,7 @@ export class UsersRepository {
   public getUserPassword = async (username: string): Promise<UserPasswordResponse> => {
     const [rows]: any = await promisePool.query('SELECT password FROM users WHERE username = ? LIMIT 1', [username])
     if (rows.length < 1) {
-      throw new Error('User with that user ID was not found');
+      throw new Error('Could not authenticate');
     }
     return rows[0] as UserPasswordResponse;
   }

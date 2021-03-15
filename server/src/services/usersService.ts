@@ -28,8 +28,11 @@ export class UsersService {
   }
 
   public authenticateUser = async (params: UserRequest): Promise<boolean> => {
-    const { id } = await this.repository.getUser(params.username);
-    const { password } = await this.repository.getUserPassword(id);
-    return comparePasswords(params.password, password);
+    return this.repository.getUserPassword(params.username)
+      .then(res => comparePasswords(params.password, res.password))
+      .catch((err) => {
+        console.error(err);
+        return false;
+      });
   }
 }

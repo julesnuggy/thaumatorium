@@ -12,5 +12,5 @@ export const getUsers = async (): Promise<User[]> =>
 export const getUserByUsername = async (username: string): Promise<User> =>
   client.get(`${usersUrl}/${username}`).then(res => res.data);
 
-export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<User> =>
+export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<boolean> =>
   client.post(`${usersUrl}/authenticate`, userLogin).then(res => res.data);

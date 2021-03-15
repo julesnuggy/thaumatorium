@@ -6,9 +6,10 @@ import styles from './forms-common.module.scss';
 
 type FormProps = {
   onSubmit: (values: UserLoginFormValues) => void;
+  isLoginValid: boolean
 }
 
-export const LoginForm = ({ onSubmit }: FormProps) => {
+export const LoginForm = ({ onSubmit, isLoginValid }: FormProps) => {
   const usernameRef = React.createRef();
   const passwordRef = React.createRef();
   const initialValues: UserLoginFormValues = ({ username: '', password: '' });
@@ -31,6 +32,7 @@ export const LoginForm = ({ onSubmit }: FormProps) => {
             <label htmlFor="password">Password</label>
             <Field name="password" title="password" innerRef={passwordRef} />
           </div>
+          {isLoginValid === false && <div className={styles.error}>Invalid username or password!</div>}
           <div className={styles.formSubmit}>
             <button type="submit">Login</button>
           </div>

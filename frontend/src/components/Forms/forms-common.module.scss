@@ -1,3 +1,5 @@
+@import 'src/constants/colours.scss';
+
 .form {
   display: grid;
   grid-template-columns: 400px;
@@ -11,5 +13,10 @@
 
   .formSubmit {
     padding: 20px 0;
+  }
+
+  .error {
+    color: $hot-pink;
+    font-weight: bold;
   }
 }
