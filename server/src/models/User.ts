@@ -8,6 +8,10 @@ export type UserResponse = {
   username: string;
 }
 
+export type UserPasswordResponse = {
+  password: string;
+}
+
 export type UserType = {
   id: string;
   username: string;

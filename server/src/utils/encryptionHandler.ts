@@ -8,3 +8,10 @@ export const hashPassword = async (passwordString: string) => (
       throw new Error(err);
     })
 );
+
+export const comparePasswords = async (loginPassword: string, databaseHash: string) => (
+  bcrypt.compare(loginPassword, databaseHash)
+    .catch(err => {
+      throw new Error(err);
+    })
+);

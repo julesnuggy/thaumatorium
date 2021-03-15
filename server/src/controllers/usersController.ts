@@ -30,4 +30,11 @@ export class UsersController extends Controller {
     this.setStatus(200);
     return this.service.createUser(user);
   }
+
+  @SuccessResponse('200', 'Created')
+  @Post('/authenticate')
+  public async authenticateUser(@Body() user: UserRequest): Promise<boolean> {
+    this.setStatus(200);
+    return this.service.authenticateUser(user);
+  }
 }

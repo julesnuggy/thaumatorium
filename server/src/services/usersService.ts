@@ -1,7 +1,7 @@
 import { v4 as UUID } from 'uuid';
 import { User, UserRequest, UserResponse } from '../models/User';
 import { UsersRepository } from '../repositories/usersRepository';
-import { hashPassword } from '../utils/encryptionHandler';
+import { hashPassword, comparePasswords } from '../utils/encryptionHandler';
 
 export class UsersService {
   private repository = new UsersRepository();
@@ -11,7 +11,7 @@ export class UsersService {
   }
 
   public getUserByUsername = (username: string): Promise<UserResponse> => {
-    return this.repository.getUserByUsername(username);
+    return this.repository.getUser(username);
   }
 
   public createUser = async (params: UserRequest): Promise<void> => {
@@ -25,5 +25,11 @@ export class UsersService {
     const user = new User(userProperties)
 
     return this.repository.createUser(user);
+  }
+
+  public authenticateUser = async (params: UserRequest): Promise<boolean> => {
+    const { id } = await this.repository.getUser(params.username);
+    const { password } = await this.repository.getUserPassword(id);
+    return comparePasswords(params.password, password);
   }
 }

@@ -1,4 +1,4 @@
-import { UserResponse, UserType } from '../models/User';
+import { UserResponse, UserPasswordResponse, UserType } from '../models/User';
 import { promisePool } from '../db'
 
 export class UsersRepository {
@@ -7,12 +7,20 @@ export class UsersRepository {
     return rows as UserResponse[];
   }
 
-  public getUserByUsername = async (username: string): Promise<UserResponse> => {
+  public getUser = async (username: string): Promise<UserResponse> => {
     const [rows]: any = await promisePool.query('SELECT id, username FROM users WHERE username = ? LIMIT 1', [username])
     if (rows.length < 1) {
       throw new Error('User with that username was not found');
     }
     return rows[0] as UserResponse;
+  }
+
+  public getUserPassword = async (username: string): Promise<UserPasswordResponse> => {
+    const [rows]: any = await promisePool.query('SELECT password FROM users WHERE username = ? LIMIT 1', [username])
+    if (rows.length < 1) {
+      throw new Error('User with that user ID was not found');
+    }
+    return rows[0] as UserPasswordResponse;
   }
 
   public createUser = async (user: UserType): Promise<void> => {
