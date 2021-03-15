@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
@@ -8,11 +8,11 @@ import Magic from './pages/Magic';
 import Archmagistration from './pages/Archmagistration';
 import Login from './pages/Login';
 
-import styles from './App.module.scss';
 import './Global.module.scss';
+import Header from "./components/Header/Header";
 
 type LoginContextType = {
-  loggedInUser: boolean,
+  loggedInUser: string,
   setLoggedInUser: React.Dispatch<any>
 }
 
@@ -28,9 +28,7 @@ const App = (): React.FC => {
   return (
     <BrowserRouter>
       <LoginContext.Provider value={loginContextValues}>
-        <div className={styles.headerBar}>
-          {loggedInUser ? `Logged in as: ${loggedInUser}` : 'Not logged in'}
-        </div>
+        <Header LoginContext={LoginContext} />
         <Switch>
           <Route exact path="/">
             <Home/>

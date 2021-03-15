@@ -9,10 +9,6 @@ type props = {
 
 const Page = ({ children, title }: props): React.FC => (
   <>
-    <div className={styles.header}>
-      <div className={styles.headerTitle}>Thaumatorium</div>
-      <p>A place of magic, wonders and mysteries.</p>
-    </div>
     <div className={styles.pageTitle}>{title}</div>
     <div className={styles.content}>
       {children}
