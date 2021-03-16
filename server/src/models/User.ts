@@ -9,6 +9,7 @@ export type UserResponse = {
 }
 
 export type UserPasswordResponse = {
+  id: string;
   password: string;
 }
 

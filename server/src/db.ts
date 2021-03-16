@@ -60,11 +60,21 @@ const createUsersTable = `
   );
 `;
 
+const createSessionTable = `
+  CREATE TABLE IF NOT EXISTS session
+  (
+      id     VARCHAR(36) not null unique,
+      userId VARCHAR(36) not null unique,
+      PRIMARY KEY (id),
+      FOREIGN KEY (userId) REFERENCES users(id)
+  );
+`;
 
 const initialiseTables = async () => {
   try {
     await promisePool.execute(createProductsTable).catch(err => console.log(err));
     await promisePool.execute(createUsersTable).catch(err => console.log(err));
+    await promisePool.execute(createSessionTable).catch(err => console.log(err));
     console.log("Validated database tables.");
   } catch (err) {
     throw new Error(`There was an issue validating the DB tables:\n${err}`);

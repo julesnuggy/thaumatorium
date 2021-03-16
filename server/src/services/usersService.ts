@@ -1,17 +1,19 @@
 import { v4 as UUID } from 'uuid';
 import { User, UserRequest, UserResponse } from '../models/User';
 import { UsersRepository } from '../repositories/usersRepository';
+import { SessionRepository } from '../repositories/sessionRepository';
 import { hashPassword, comparePasswords } from '../utils/encryptionHandler';
 
 export class UsersService {
-  private repository = new UsersRepository();
+  private userRepository = new UsersRepository();
+  private sessionRepository = new SessionRepository();
 
   public getUsers = (): Promise<UserResponse[]> => {
-    return this.repository.getUsers();
+    return this.userRepository.getUsers();
   }
 
   public getUserByUsername = (username: string): Promise<UserResponse> => {
-    return this.repository.getUser(username);
+    return this.userRepository.getUser(username);
   }
 
   public createUser = async (params: UserRequest): Promise<void> => {
@@ -24,15 +26,26 @@ export class UsersService {
     }
     const user = new User(userProperties)
 
-    return this.repository.createUser(user);
+    return this.userRepository.createUser(user);
   }
 
   public authenticateUser = async (params: UserRequest): Promise<boolean> => {
-    return this.repository.getUserPassword(params.username)
-      .then(res => comparePasswords(params.password, res.password))
+    const userPassword = await this.userRepository.getUserPassword(params.username)
       .catch((err) => {
         console.error(err);
-        return false;
+        throw new Error(err);
       });
+
+    const isAuthenticated = comparePasswords(params.password, userPassword.password);
+
+    if (isAuthenticated) {
+      const session = {
+        id: UUID(),
+        userId: userPassword.id
+      }
+      await this.sessionRepository.createSession(session);
+    }
+
+    return isAuthenticated;
   }
 }
