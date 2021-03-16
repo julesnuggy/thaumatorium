@@ -13,6 +13,11 @@ export type UserPasswordResponse = {
   password: string;
 }
 
+export type UserAuthenticatedResponse = {
+  isAuthenticated: boolean;
+  sessionId?: string;
+}
+
 export type UserType = {
   id: string;
   username: string;

@@ -1,5 +1,5 @@
 import { v4 as UUID } from 'uuid';
-import { User, UserRequest, UserResponse } from '../models/User';
+import { User, UserAuthenticatedResponse, UserRequest, UserResponse } from '../models/User';
 import { UsersRepository } from '../repositories/usersRepository';
 import { SessionRepository } from '../repositories/sessionRepository';
 import { hashPassword, comparePasswords } from '../utils/encryptionHandler';
@@ -29,23 +29,43 @@ export class UsersService {
     return this.userRepository.createUser(user);
   }
 
-  public authenticateUser = async (params: UserRequest): Promise<boolean> => {
+  public authenticateUser = async (params: UserRequest): Promise<UserAuthenticatedResponse> => {
     const userPassword = await this.userRepository.getUserPassword(params.username)
       .catch((err) => {
         console.error(err);
         throw new Error(err);
       });
 
-    const isAuthenticated = comparePasswords(params.password, userPassword.password);
+    const isAuthenticated = await comparePasswords(params.password, userPassword.password);
 
     if (isAuthenticated) {
-      const session = {
-        id: UUID(),
-        userId: userPassword.id
+      const existingSession = await this.sessionRepository.getSession(userPassword.id);
+
+      if (existingSession) {
+        return {
+          isAuthenticated,
+          sessionId: existingSession.id
+        };
+      } else {
+        const sessionId = UUID();
+        const session = {
+          id: sessionId,
+          userId: userPassword.id
+        };
+        await this.sessionRepository.createSession(session)
+          .catch((err) => {
+            console.error(err);
+            throw new Error(err);
+          });
+
+        return {
+          isAuthenticated,
+          sessionId
+        };
       }
-      await this.sessionRepository.createSession(session);
+
     }
 
-    return isAuthenticated;
+    return { isAuthenticated: false }
   }
 }

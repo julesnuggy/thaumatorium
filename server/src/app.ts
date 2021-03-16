@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 import { RegisterRoutes } from '../build/routes';
@@ -13,7 +14,11 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  credentials : true,
+  origin: 'http://localhost:3000'
+}));
+app.use(cookieParser());
 
 RegisterRoutes(app)
 

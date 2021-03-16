@@ -12,5 +12,9 @@ export const getUsers = async (): Promise<User[]> =>
 export const getUserByUsername = async (username: string): Promise<User> =>
   client.get(`${usersUrl}/${username}`).then(res => res.data);
 
+const axiosConfig = {
+  withCredentials: true,
+  origin: 'http://localhost:3000'
+}
 export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<UserAuthenticatedResponse> =>
-  client.post(`${usersUrl}/authenticate`, userLogin).then(res => res.data);
+  client.post(`${usersUrl}/authenticate`, userLogin, axiosConfig).then(res => res.data);
