@@ -16,8 +16,8 @@ const Login = ({ LoginContext }: LoginProps) => {
   const { setLoggedInUser } = useContext(LoginContext)
 
   const onSubmit = async (values: UserLoginFormValues) => {
-    const authRes = await userApis.authenticateUser(values);
-    await setIsLoginValid(authRes);
+    const { isAuthenticated } = await userApis.authenticateUser(values);
+    await setIsLoginValid(isAuthenticated);
     setLoggedInUser(values.username);
     history.push('/archmagistration');
   }

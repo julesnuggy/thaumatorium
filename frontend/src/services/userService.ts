@@ -1,5 +1,5 @@
 import { client } from './axiosClient';
-import { User, UserLoginFormValues } from '../models/User';
+import { User, UserAuthenticatedResponse, UserLoginFormValues } from '../models/User';
 
 export const usersUrl = '/users';
 
@@ -12,5 +12,5 @@ export const getUsers = async (): Promise<User[]> =>
 export const getUserByUsername = async (username: string): Promise<User> =>
   client.get(`${usersUrl}/${username}`).then(res => res.data);
 
-export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<boolean> =>
+export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<UserAuthenticatedResponse> =>
   client.post(`${usersUrl}/authenticate`, userLogin).then(res => res.data);
