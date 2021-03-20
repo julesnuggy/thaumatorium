@@ -1,0 +1,48 @@
+@import 'src/constants/colours';
+
+.header {
+  color: $yellow;
+
+  .navBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: $black-opaque;
+    color: $beige;
+
+    .navButtonsWrapper, .account {
+      .navLink {
+        margin: 0 15px;
+        padding: 5px;
+        color: $yellow;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .current {
+        color: $hot-pink;
+        text-decoration: underline;
+        text-underline-offset: 7px;
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
+
+  .headerWrapper {
+    padding: 1rem;
+    text-align: center;
+
+    .headerTitle {
+      font-size: 50px;
+      font-weight: bold;
+    }
+  }
+}

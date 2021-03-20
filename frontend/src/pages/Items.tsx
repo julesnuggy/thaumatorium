@@ -2,13 +2,13 @@ import React, { useCallback, useEffect } from "react";
 
 import Page from "../components/Page/Page";
 import Product from "../components/Product/Product";
-import { getProducts } from "../services/servatorium";
+import { productApis } from "../services/servatorium";
 import { useRequestState } from "../utils/hooksUtils";
 
 import styles from './Items.module.scss';
 
 const useProductsRequests = () => {
-  const getProductsData = useCallback(() =>  getProducts(), []);
+  const getProductsData = useCallback(() =>  productApis.getProducts(), []);
   const { loading, data, error, call } = useRequestState(getProductsData)
 
   useEffect(() => {
