@@ -18,3 +18,6 @@ const axiosConfig = {
 }
 export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<UserAuthenticatedResponse> =>
   client.post(`${usersUrl}/authenticate`, userLogin, axiosConfig).then(res => res.data);
+
+export const verifySession = async (): Promise<User> =>
+  client.get(`${usersUrl}/verify-session`, axiosConfig).then(res => res.data);
