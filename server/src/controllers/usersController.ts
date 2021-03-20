@@ -2,6 +2,7 @@ import {
   Body,
   Path,
   Controller,
+  Delete,
   Get,
   Post,
   Request,
@@ -55,11 +56,21 @@ export class UsersController extends Controller {
     }
   }
 
-  private setSessionCookieHeaders = (sessionId: string, req: ExpressRequest) => {
+  @SuccessResponse('204', 'Success')
+  @Delete()
+  public async logout (@Request() req: ExpressRequest): Promise<void> {
+    const { sessionId } = req.cookies;
+    await this.service.logout(sessionId);
+    this.setSessionCookieHeaders('', req, true);
+    this.setStatus(204)
+  }
+
+  private setSessionCookieHeaders = (sessionId: string, req: ExpressRequest, expireCookie?: boolean) => {
+    const cookieExpiry = expireCookie ? `Expires=${(new Date()).toUTCString()}` : 'max-age=86400';
     this.setHeader('Access-Control-Allow-Credentials', 'true');
     this.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS')
     this.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     this.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')
-    this.setHeader('Set-Cookie', [`sessionId=${sessionId}; httpOnly; secure; signed; max-age=86400; path=/`]);
+    this.setHeader('Set-Cookie', [`sessionId=${sessionId}; httpOnly; secure; signed; ${cookieExpiry}; path=/`]);
   }
 }

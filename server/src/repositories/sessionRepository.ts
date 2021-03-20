@@ -35,4 +35,10 @@ export class SessionRepository {
     }
     return rows[0] as Session;
   }
+
+  public deleteSession = async (sessionId: string): Promise<void> => {
+    await promisePool.query('DELETE FROM session WHERE id = (?) LIMIT 1',[sessionId])
+      .then(([rows]: any) => console.log('Successfully deleted session ID: ', sessionId, rows))
+      .catch((err) => console.error('Error deleting session ID: ', sessionId, err));
+  }
 }

@@ -73,4 +73,8 @@ export class UsersService {
     }
     throw new Error ('No session found');
   }
+
+  public logout = async (sessionId: string): Promise<void> => {
+    return this.sessionRepository.deleteSession(sessionId);
+  }
 }
