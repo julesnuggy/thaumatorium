@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import HeaderNavLink from './HeaderNavLink';
 import { navLocations } from '../../constants/navLocations';
@@ -6,15 +6,24 @@ import { navLocations } from '../../constants/navLocations';
 import styles from './Header.module.scss';
 
 type HeaderProps = {
-  LoginContext: React.Context
+  LoginContext: React.Context,
+  onLogout: () => void
 }
 
-const Header = ({ LoginContext }: HeaderProps) => {
+const Header = ({ LoginContext, onLogout }: HeaderProps) => {
   const { home, items, equipment, magic, archmagistration, login } = navLocations;
+
   const Account = () => (
     <LoginContext.Consumer>
       {({ loggedInUser }) =>
-        (loggedInUser ? `Logged in as: ${loggedInUser}` : <HeaderNavLink location={login} />)
+        (loggedInUser ? (
+          <>
+            Logged in as: {loggedInUser}
+            <button onClick={onLogout}>Log Out</button>
+          </>
+        ) : (
+          <HeaderNavLink location={login} />
+        ))
       }
     </LoginContext.Consumer>
   )

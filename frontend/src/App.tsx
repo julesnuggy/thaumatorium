@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
@@ -25,7 +25,9 @@ const LoginContext = createContext<LoginContextType>({
 
 const useUsersRequests = () => {
   const verifySession = useCallback(() => userApis.verifySession(), []);
+  const logout = useCallback(() => userApis.logout(), []);
   const { loading, data, error, call: callVerifySession } = useRequestState(verifySession);
+  const { success: logoutSuccess, call: callLogout } = useRequestState(logout);
 
   useEffect(() => {
     callVerifySession();
@@ -35,14 +37,16 @@ const useUsersRequests = () => {
     loading,
     data,
     error,
-    callVerifySession
+    callVerifySession,
+    logoutSuccess,
+    callLogout
   };
 }
 
 const App = (): React.FC => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const loginContextValues = { loggedInUser, setLoggedInUser };
-  const { loading, data, error, callVerifySession } = useUsersRequests();
+  const { loading, data, error, callVerifySession, logoutSuccess, callLogout } = useUsersRequests();
 
   useEffect(() => {
     if (loggedInUser && !data) {
@@ -52,12 +56,16 @@ const App = (): React.FC => {
     if (!loggedInUser && data) {
       setLoggedInUser(data.username);
     }
-  }, [data, callVerifySession, setLoggedInUser])
+
+    if (logoutSuccess) {
+      setLoggedInUser(null);
+    }
+  }, [data, callVerifySession, setLoggedInUser, logoutSuccess])
 
   return (
     <BrowserRouter>
       <LoginContext.Provider value={loginContextValues}>
-        <Header LoginContext={LoginContext} />
+        <Header LoginContext={LoginContext} onLogout={callLogout} />
         <Switch>
           <Route exact path="/">
             <Home/>
@@ -74,7 +82,7 @@ const App = (): React.FC => {
           <Route path="/archmagistration">
             {loading && <div>Loading...</div>}
             {!loading && loggedInUser && <Archmagistration/>}
-            {error && !loggedInUser && <Redirect to="/login"/>}
+            {((error && !loggedInUser) || (logoutSuccess)) && <Redirect to="/login"/>}
           </Route>
           <Route path="/login">
             <Login LoginContext={LoginContext}/>

@@ -21,3 +21,6 @@ export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<
 
 export const verifySession = async (): Promise<User> =>
   client.get(`${usersUrl}/verify-session`, axiosConfig).then(res => res.data);
+
+export const logout = async (): Promise<void> =>
+  client.delete(usersUrl, axiosConfig).then(res => res.data);
