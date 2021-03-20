@@ -45,15 +45,10 @@ export class UsersController extends Controller {
 
   @Get('/verify-session')
   public async verifySession(@Request() req: ExpressRequest): Promise<UserResponse> {
-    try {
-      const { sessionId } = req.cookies;
-      const user = await this.service.verifySession(sessionId);
-      this.setSessionCookieHeaders(sessionId, req);
-      return user;
-    } catch (err) {
-      console.error(err);
-      throw new Error (err);
-    }
+    const { sessionId } = req.cookies;
+    const user = await this.service.verifySession(sessionId);
+    this.setSessionCookieHeaders(sessionId, req);
+    return user;
   }
 
   @SuccessResponse('204', 'Success')

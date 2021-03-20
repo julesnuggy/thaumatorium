@@ -18,11 +18,10 @@ export class SessionRepository {
       [userId]
     );
     if (rows.length < 1) {
-      console.error('No session for that user');
       return null;
     }
     return rows[0] as Session;
-  }
+  };
 
   public verifySession = async (sessionId: string): Promise<Session | null> => {
     const [rows]: any = await promisePool.query(
@@ -30,15 +29,12 @@ export class SessionRepository {
       [sessionId]
     );
     if (rows.length < 1) {
-      console.error('No session found');
       return null;
     }
     return rows[0] as Session;
-  }
+  };
 
   public deleteSession = async (sessionId: string): Promise<void> => {
-    await promisePool.query('DELETE FROM session WHERE id = (?) LIMIT 1',[sessionId])
-      .then(([rows]: any) => console.log('Successfully deleted session ID: ', sessionId, rows))
-      .catch((err) => console.error('Error deleting session ID: ', sessionId, err));
-  }
+    await promisePool.query('DELETE FROM session WHERE id = (?) LIMIT 1', [sessionId]);
+  };
 }
