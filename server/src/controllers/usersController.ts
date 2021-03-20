@@ -28,14 +28,14 @@ export class UsersController extends Controller {
     return this.service.createUser(user);
   }
 
-  @SuccessResponse('200', 'Created')
+  @SuccessResponse('201', 'Created')
   @Post('/authenticate')
   public async authenticateUser(
     @Body() user: UserRequest,
     @Request() req: ExpressRequest): Promise<UserAuthenticatedResponse> {
     const { isAuthenticated, sessionId } = await this.service.authenticateUser(user);
     sessionId && this.setSessionCookieHeaders(sessionId, req);
-    this.setStatus(200);
+    this.setStatus(201);
     return {
       isAuthenticated,
       sessionId
@@ -45,7 +45,7 @@ export class UsersController extends Controller {
   @Get('/verify-session')
   public async verifySession(@Request() req: ExpressRequest): Promise<UserResponse> {
     try {
-      const {sessionId} = req.cookies;
+      const { sessionId } = req.cookies;
       const user = await this.service.verifySession(sessionId);
       this.setSessionCookieHeaders(sessionId, req);
       return user;
