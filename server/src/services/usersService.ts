@@ -1,5 +1,6 @@
 import { v4 as UUID } from 'uuid';
 import { User, UserAuthenticatedResponse, UserRequest, UserResponse } from '../models/User';
+import { Session } from '../models/Session';
 import { UsersRepository } from '../repositories/usersRepository';
 import { SessionRepository } from '../repositories/sessionRepository';
 import { hashPassword, comparePasswords } from '../utils/encryptionHandler';
@@ -10,10 +11,6 @@ export class UsersService {
 
   public getUsers = (): Promise<UserResponse[]> => {
     return this.userRepository.getUsers();
-  }
-
-  public getUserByUsername = (username: string): Promise<UserResponse> => {
-    return this.userRepository.getUser(username);
   }
 
   public createUser = async (params: UserRequest): Promise<void> => {
@@ -63,9 +60,17 @@ export class UsersService {
           sessionId
         };
       }
-
     }
 
     return { isAuthenticated: false }
+  }
+
+  public verifySession = async (sessionId: string): Promise<UserResponse> => {
+    const session = await this.sessionRepository.verifySession(sessionId);
+    if (session) {
+      console.log('session', session)
+      return this.userRepository.getUserById(session.userId);
+    }
+    throw new Error ('No session found');
   }
 }

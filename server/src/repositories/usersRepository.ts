@@ -7,10 +7,10 @@ export class UsersRepository {
     return rows as UserResponse[];
   }
 
-  public getUser = async (username: string): Promise<UserResponse> => {
-    const [rows]: any = await promisePool.query('SELECT id, username FROM users WHERE username = ? LIMIT 1', [username])
+  public getUserById = async (userId: string): Promise<UserResponse> => {
+    const [rows]: any = await promisePool.query('SELECT id, username FROM users WHERE id = ? LIMIT 1', [userId])
     if (rows.length < 1) {
-      throw new Error('User with that username was not found');
+      throw new Error(`User ${userId} was not found`);
     }
     return rows[0] as UserResponse;
   }

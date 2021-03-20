@@ -23,4 +23,16 @@ export class SessionRepository {
     }
     return rows[0] as Session;
   }
+
+  public verifySession = async (sessionId: string): Promise<Session | null> => {
+    const [rows]: any = await promisePool.query(
+      'SELECT * FROM session WHERE id = (?) LIMIT 1',
+      [sessionId]
+    );
+    if (rows.length < 1) {
+      console.error('No session found');
+      return null;
+    }
+    return rows[0] as Session;
+  }
 }
