@@ -26,41 +26,49 @@ const LoginContext = createContext<LoginContextType>({
 const useUsersRequests = () => {
   const verifySession = useCallback(() => userApis.verifySession(), []);
   const logout = useCallback(() => userApis.logout(), []);
-  const { loading, data, error, call: callVerifySession } = useRequestState(verifySession);
-  const { success: logoutSuccess, call: callLogout } = useRequestState(logout);
+  const { loading: sessionLoading, data: sessionData, call: callVerifySession, reset: resetSessionState } = useRequestState(verifySession);
+  const { success: logoutSuccess, call: callLogout, reset: resetLogoutState } = useRequestState(logout);
 
   useEffect(() => {
     callVerifySession();
   }, [callVerifySession])
 
   return {
-    loading,
-    data,
-    error,
+    sessionLoading,
+    sessionData,
     callVerifySession,
+    resetSessionState,
     logoutSuccess,
-    callLogout
+    callLogout,
+    resetLogoutState
   };
 }
 
 const App = (): React.FC => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const loginContextValues = { loggedInUser, setLoggedInUser };
-  const { loading, data, error, callVerifySession, logoutSuccess, callLogout } = useUsersRequests();
+  const {
+    sessionLoading,
+    sessionData,
+    callVerifySession,
+    resetSessionState,
+    logoutSuccess,
+    callLogout,
+    resetLogoutState
+  } = useUsersRequests();
 
   useEffect(() => {
-    if (loggedInUser && !data) {
-      callVerifySession()
-    }
-
-    if (!loggedInUser && data) {
-      setLoggedInUser(data.username);
+    if (!loggedInUser && sessionData) {
+      console.log('!loggedInUser && data')
+      setLoggedInUser(sessionData.username);
     }
 
     if (logoutSuccess) {
       setLoggedInUser(null);
+      resetLogoutState();
+      resetSessionState();
     }
-  }, [data, callVerifySession, setLoggedInUser, logoutSuccess])
+  }, [sessionData, loggedInUser, callVerifySession, setLoggedInUser, logoutSuccess, resetLogoutState])
 
   return (
     <BrowserRouter>
@@ -80,9 +88,8 @@ const App = (): React.FC => {
             <Magic/>
           </Route>
           <Route path="/archmagistration">
-            {loading && <div>Loading...</div>}
-            {!loading && loggedInUser && <Archmagistration/>}
-            {((error && !loggedInUser) || (logoutSuccess)) && <Redirect to="/login"/>}
+            {sessionLoading && <div>Loading...</div>}
+            {loggedInUser ? (<Archmagistration/>) : (<Redirect to="/login"/>)}
           </Route>
           <Route path="/login">
             <Login LoginContext={LoginContext}/>

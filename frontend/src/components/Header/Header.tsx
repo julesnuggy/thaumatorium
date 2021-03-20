@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React  from 'react';
 
 import HeaderNavLink from './HeaderNavLink';
 import { navLocations } from '../../constants/navLocations';
