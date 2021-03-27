@@ -54,12 +54,13 @@ const createItemsTable = `
 const createEquipmentsTable = `
   CREATE TABLE IF NOT EXISTS equipments
   (
-    id          VARCHAR(36)          not null unique,
-    title       VARCHAR(255)         not null,
-    description VARCHAR(255),
-    imageName   VARCHAR(255),
-    stock       INT,
-    type        VARCHAR(255),
+    id              VARCHAR(36) not null unique,
+    title           VARCHAR(255) not null,
+    description     VARCHAR(255),
+    imageName       VARCHAR(255),
+    stock           INT,
+    type            VARCHAR(255),
+    equipmentType   VARCHAR(255),
     PRIMARY KEY (id)
   );
 `;

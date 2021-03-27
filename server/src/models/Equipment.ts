@@ -1,12 +1,14 @@
 import { IBaseProduct } from './BaseProduct';
-import { ProductType } from '../enums/productType';
+import { EquipmentType, ProductType } from '../enums/productType';
 
 export interface EquipmentRequest extends IBaseProduct {
   id?: string;
+  equipmentType: EquipmentType;
 }
 
 export interface EquipmentResponse extends IBaseProduct {
   id: string;
+  equipmentType: EquipmentType;
 }
 
 export class Equipment implements IBaseProduct {
@@ -14,6 +16,7 @@ export class Equipment implements IBaseProduct {
   public title!: string;
   public description!: string;
   public type!: ProductType;
+  public equipmentType!: EquipmentType;
   public imageName!: string;
   public stock!: number;
 }
