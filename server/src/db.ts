@@ -38,8 +38,8 @@ const initialiseDatabase = async (connection: Connection, databaseName: string) 
   }
 };
 
-const createProductsTable = `
-  CREATE TABLE IF NOT EXISTS products
+const createItemsTable = `
+  CREATE TABLE IF NOT EXISTS items
   (
     id          INT          not null auto_increment,
     title       VARCHAR(255) not null,
@@ -72,7 +72,7 @@ const createSessionTable = `
 
 const initialiseTables = async () => {
   try {
-    await promisePool.execute(createProductsTable).catch(err => console.log(err));
+    await promisePool.execute(createItemsTable).catch(err => console.log(err));
     await promisePool.execute(createUsersTable).catch(err => console.log(err));
     await promisePool.execute(createSessionTable).catch(err => console.log(err));
     console.log("Validated database tables.");
