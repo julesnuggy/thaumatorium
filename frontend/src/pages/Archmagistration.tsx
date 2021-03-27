@@ -3,11 +3,12 @@ import React, { useCallback, useEffect } from 'react';
 import Page from '../components/Page/Page';
 import { Item } from '../models/Item';
 import { User } from '../models/User';
-import { itemApis, userApis } from '../services/servatorium';
+import { itemApis, equipmentApis, userApis } from '../services/servatorium';
 import { useRequestState } from '../utils/hooksUtils';
 import { NewItemForm } from '../components/Forms/NewItemForm';
 import { NewEquipmentForm } from '../components/Forms/NewEquipmentForm';
 import { NewUserForm } from '../components/Forms/NewUserForm';
+import { Equipment } from '../models/Equipment';
 
 const useItemsRequests = () => {
   const callCreateItem = useCallback((item: Item) =>  itemApis.createItem(item), []);
@@ -19,6 +20,20 @@ const useItemsRequests = () => {
     data,
     error
   };
+}
+
+const useEquipmentRequests = () => {
+  const createEquipment = useCallback(
+    (equipment: Equipment) => equipmentApis.createEquipment(equipment),
+    [])
+  const { loading, error: createEquipmentError, success: createEquipmentSuccess, call: callCreateEquipment } = useRequestState(createEquipment);
+
+  return {
+    callCreateEquipment,
+    loading,
+    createEquipmentError,
+    createEquipmentSuccess
+  }
 }
 
 const useUsersRequests = () => {
@@ -72,6 +87,7 @@ const UsersTable = ({ users }: UsersTableProps) => {
 
 const Archmagistration = () => {
   const { callCreateItem } = useItemsRequests();
+  const { callCreateEquipment, createEquipmentError, createEquipmentSuccess } = useEquipmentRequests();
   const { callCreateUser, callGetUsers, users } = useUsersRequests();
 
   const onSubmitUser = async (values: User) => {
@@ -83,13 +99,17 @@ const Archmagistration = () => {
     await callCreateItem(values);
   }
 
+  const onSubmitEquipment = async (values: Equipment) => {
+    await callCreateEquipment(values);
+  }
+
   return (
     <Page title="Archmagistration">
       <NewUserForm onSubmit={onSubmitUser} />
       {users && <UsersTable users={users}/>}
       <hr />
       <NewItemForm onSubmit={onSubmitItem} />
-      <NewEquipmentForm onSubmit={console.log} />
+      <NewEquipmentForm onSubmit={onSubmitEquipment} error={createEquipmentError} success={createEquipmentSuccess} />
     </Page>
   )
 }

@@ -8,7 +8,7 @@ import {
 import { EquipmentRequest } from '../models/Equipment';
 import { EquipmentsService } from '../services/equipmentsService';
 
-@Route('equipments')
+@Route('equipment')
 export class ProductsController extends Controller {
   private service = new EquipmentsService();
 

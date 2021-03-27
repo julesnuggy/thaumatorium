@@ -5,7 +5,7 @@ export type UseRequestStateType = {
   error: boolean;
   success: boolean;
   data?: any;
-  call: () => void;
+  call: (args?: any) => void;
   reset: () => void;
 }
 

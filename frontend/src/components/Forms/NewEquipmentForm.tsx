@@ -7,6 +7,8 @@ import styles from './forms-common.module.scss';
 
 type FormProps = {
   onSubmit: (values: Equipment) => void;
+  error: boolean;
+  success: boolean;
 }
 
 const EquipmentTypeOptions = () => {
@@ -20,14 +22,16 @@ const EquipmentTypeOptions = () => {
   );
 }
 
-export const NewEquipmentForm = ({ onSubmit }: FormProps) => {
+export const NewEquipmentForm = ({ onSubmit, error, success }: FormProps) => {
   const titleRef = React.createRef();
   const initialValues: Equipment = ({ title: '', description: '', type: ProductType.EQUIPMENT, equipmentType: '', imageName: '', stock: 0 });
 
   const handleSubmit = async (values: Equipment, { resetForm }) => {
     await onSubmit(values);
-    resetForm();
-    titleRef.current?.focus();
+    if (success) {
+      resetForm();
+      titleRef.current?.focus();
+    }
   };
 
   return (
@@ -35,6 +39,8 @@ export const NewEquipmentForm = ({ onSubmit }: FormProps) => {
       {() => (
         <Form className={styles.form} title="Add New Equipment" name="newEquipment">
           <b>Add New Equipment</b>
+          {error && <div className={styles.error}>Error creating new product...</div>}
+          {success && <div className={styles.success}>Successfully created new product!</div>}
           <div className={styles.formItem}>
             <label htmlFor="title">Title</label>
             <Field name="title" title="title" innerRef={titleRef} />
