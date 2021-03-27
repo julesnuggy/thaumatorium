@@ -1,19 +1,19 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from 'react';
 
 import Page from '../components/Page/Page';
-import { Product } from "../models/Product";
-import { User } from "../models/User";
-import { productApis, userApis } from "../services/servatorium";
-import { useRequestState } from "../utils/hooksUtils";
-import { NewProductForm } from "../components/Forms/NewProductForm";
-import { NewUserForm } from "../components/Forms/NewUserForm";
+import { Item } from '../models/Item';
+import { User } from '../models/User';
+import { itemApis, userApis } from '../services/servatorium';
+import { useRequestState } from '../utils/hooksUtils';
+import { NewItemForm } from '../components/Forms/NewItemForm';
+import { NewUserForm } from '../components/Forms/NewUserForm';
 
-const useProductsRequests = () => {
-  const callCreateProduct = useCallback((product: Product) =>  productApis.createProduct(product), []);
-  const { loading, data, error } = useRequestState(callCreateProduct);
+const useItemsRequests = () => {
+  const callCreateItem = useCallback((item: Item) =>  itemApis.createItem(item), []);
+  const { loading, data, error } = useRequestState(callCreateItem);
 
   return {
-    callCreateProduct,
+    callCreateItem,
     loading,
     data,
     error
@@ -70,7 +70,7 @@ const UsersTable = ({ users }: UsersTableProps) => {
 }
 
 const Archmagistration = () => {
-  const { callCreateProduct } = useProductsRequests();
+  const { callCreateItem } = useItemsRequests();
   const { callCreateUser, callGetUsers, users } = useUsersRequests();
 
   const onSubmitUser = async (values: User) => {
@@ -78,8 +78,8 @@ const Archmagistration = () => {
     await callGetUsers();
   };
 
-  const onSubmitProduct = async (values: Product) => {
-    await callCreateProduct(values);
+  const onSubmitItem = async (values: Item) => {
+    await callCreateItem(values);
   }
 
   return (
@@ -87,7 +87,7 @@ const Archmagistration = () => {
       <NewUserForm onSubmit={onSubmitUser} />
       {users && <UsersTable users={users}/>}
       <hr />
-      <NewProductForm onSubmit={onSubmitProduct} />
+      <NewItemForm onSubmit={onSubmitItem} />
     </Page>
   )
 }

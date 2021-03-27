@@ -1,20 +1,22 @@
-export interface IProduct {
+export interface IItem {
   title: string;
   description: string;
+  type: string;
   imageName: string;
   stock: number;
 }
 
-export interface ProductRequest extends IProduct {}
+export interface ItemRequest extends IItem {}
 
-export interface ProductResponse extends IProduct {
+export interface ItemResponse extends IItem {
   id: string;
 }
 
-export class Product implements IProduct {
+export class Item implements IItem {
   public id!: string;
   public title!: string;
   public description!: string;
+  public type!: string;
   public imageName!: string;
   public stock!: number;
 }

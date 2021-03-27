@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from 'react';
 
-import Page from "../components/Page/Page";
-import Product from "../components/Product/Product";
-import { productApis } from "../services/servatorium";
-import { useRequestState } from "../utils/hooksUtils";
+import Page from '../components/Page/Page';
+import Item from '../components/Item/Item';
+import { itemApis } from '../services/servatorium';
+import { useRequestState } from '../utils/hooksUtils';
 
 import styles from './Items.module.scss';
 
-const useProductsRequests = () => {
-  const getProductsData = useCallback(() =>  productApis.getProducts(), []);
-  const { loading, data, error, call } = useRequestState(getProductsData)
+const useItemsRequests = () => {
+  const getItemsData = useCallback(() =>  itemApis.getItems(), []);
+  const { loading, data, error, call } = useRequestState(getItemsData)
 
   useEffect(() => {
     call();
@@ -19,17 +19,18 @@ const useProductsRequests = () => {
 }
 
 const Items = () => {
-  const { data } = useProductsRequests();
+  const { data } = useItemsRequests();
   return (
     <Page title="Items">
-      <div className={styles.productsContainer}>
-        {data?.map((product, idx) => (
-          <Product
-            key={`${product.title}_${idx}`}
-            title={product.title}
-            imageName={product.imageName}
-            description={product.description}
-            stock={product.stock}
+      <div className={styles.itemsContainer}>
+        {data?.map((item, idx) => (
+          <Item
+            key={`${item.title}_${idx}`}
+            title={item.title}
+            imageName={item.imageName}
+            description={item.description}
+            type={item.type}
+            stock={item.stock}
           />
         ))}
       </div>
