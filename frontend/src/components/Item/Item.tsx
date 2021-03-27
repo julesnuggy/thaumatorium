@@ -8,6 +8,7 @@ type props = {
   title: string;
   imageName: string;
   description: string;
+  type: string;
   stock: number;
 }
 
@@ -24,7 +25,7 @@ const useItemCount = (stock: number) => {
   }
 }
 
-const Item = ({ title, imageName, description, stock }: props): React.FC => {
+const Item = ({ title, imageName, description, type, stock }: props): React.FC => {
   const {
     count,
     increaseCount,
@@ -41,6 +42,9 @@ const Item = ({ title, imageName, description, stock }: props): React.FC => {
       </div>
       <div className={styles.description}>
         {description}
+      </div>
+      <div className={styles.type}>
+        {type}
       </div>
       <div className={styles.stock}>Stock: {stock}</div>
       <div className={styles.controls}>

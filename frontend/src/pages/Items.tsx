@@ -29,6 +29,7 @@ const Items = () => {
             title={item.title}
             imageName={item.imageName}
             description={item.description}
+            type={item.type}
             stock={item.stock}
           />
         ))}

@@ -9,8 +9,8 @@ export class ItemsRepository {
 
   public createItem = async (params: ItemRequest): Promise<void> => {
     await promisePool.query(
-      'INSERT INTO items (title, description, imageName, stock) VALUES (?, ?, ?, ?)',
-      [params.title, params.description, params.imageName, params.stock])
+      'INSERT INTO items (title, description, type, imageName, stock) VALUES (?, ?, ?, ?, ?)',
+      [params.title, params.description, params.type, params.imageName, params.stock])
       .then(([rows]:  any) => console.log(`Created new item with ID: ${rows.insertId}`))
       .catch(err => console.error(err));
   }

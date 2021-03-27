@@ -46,6 +46,7 @@ const createItemsTable = `
     description VARCHAR(255),
     imageName   VARCHAR(255),
     stock       INT,
+    type        VARCHAR(255),
     PRIMARY KEY (id)
   );
 `;
