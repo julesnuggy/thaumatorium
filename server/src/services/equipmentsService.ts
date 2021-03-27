@@ -1,14 +1,14 @@
-import { ItemRequest, ItemResponse } from '../models/Item';
-import { ItemsRepository } from "../repositories/itemsRepository";
+import { v4 as UUID } from 'uuid';
 
-export class ItemsService {
-  private repository = new ItemsRepository();
+import { EquipmentRequest } from '../models/Equipment';
+import { EquipmentsRepository } from "../repositories/equipmentsRepository";
 
-  public getItems = async (): Promise<ItemResponse[]>=> {
-    return this.repository.getItems();
-  }
+export class EquipmentsService {
+  private repository = new EquipmentsRepository();
 
-  public createItem = (params: ItemRequest): Promise<void> => {
-    return this.repository.createItem(params);
+  public createItem = (params: EquipmentRequest): Promise<void> => {
+    const id = UUID();
+    const equipment = { ...params, id };
+    return this.repository.createEquipment(equipment);
   }
 }

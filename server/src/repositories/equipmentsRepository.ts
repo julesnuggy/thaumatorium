@@ -1,17 +1,12 @@
-import { ItemRequest, ItemResponse } from '../models/Item';
 import { promisePool } from '../db'
+import { EquipmentRequest } from '../models/Equipment';
 
-export class ItemsRepository {
-  public getItems = async ():Promise<ItemResponse[]> => {
-    const [rows] = await promisePool.query('SELECT * FROM items;')
-    return rows as ItemResponse[];
-  }
-
-  public createItem = async (params: ItemRequest): Promise<void> => {
+export class EquipmentsRepository {
+  public createEquipment = async (equipment: EquipmentRequest): Promise<void> => {
     await promisePool.query(
-      'INSERT INTO items (title, description, type, imageName, stock) VALUES (?, ?, ?, ?, ?)',
-      [params.title, params.description, params.type, params.imageName, params.stock])
-      .then(([rows]:  any) => console.log(`Created new item with ID: ${rows.insertId}`))
+      'INSERT INTO equipments (id, title, description, type, imageName, stock) VALUES (?, ?, ?, ?, ?, ?)',
+      [equipment.id, equipment.title, equipment.description, equipment.type, equipment.imageName, equipment.stock])
+      .then(() => console.log(`Added new equipment to database!`))
       .catch(err => console.error(err));
   }
 }
