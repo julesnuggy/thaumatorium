@@ -1,11 +1,11 @@
-export type Product = {
+export type Item = {
   title: string;
   description: string;
   imageName: string;
   stock: number;
 }
 
-export type ProductResponse = {
+export type ItemResponse = {
   id: string;
   title: string;
   description: string;

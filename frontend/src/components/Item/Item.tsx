@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Icon from "../Icon/Icon";
 
-import styles from './Product.module.scss';
+import styles from './Item.module.scss';
 
 type props = {
   title: string;
@@ -11,7 +11,7 @@ type props = {
   stock: number;
 }
 
-const useProductCount = (stock: number) => {
+const useItemCount = (stock: number) => {
   const [ count, setCount ] = useState(0);
 
   const increaseCount = () => setCount(prev => prev === stock ? prev : prev + 1);
@@ -24,12 +24,12 @@ const useProductCount = (stock: number) => {
   }
 }
 
-const Product = ({ title, imageName, description, stock }: props): React.FC => {
+const Item = ({ title, imageName, description, stock }: props): React.FC => {
   const {
     count,
     increaseCount,
     decreaseCount
-  } = useProductCount(stock);
+  } = useItemCount(stock);
 
   return (
     <div className={styles.container}>
@@ -52,4 +52,4 @@ const Product = ({ title, imageName, description, stock }: props): React.FC => {
   );
 }
 
-export default Product;
+export default Item;

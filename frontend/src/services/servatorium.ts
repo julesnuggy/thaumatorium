@@ -1,5 +1,5 @@
-import { getProducts, createProduct } from './productService';
+import { getItems, createItem } from './itemService';
 import { getUsers, getUserByUsername, createUser, authenticateUser, verifySession, logout } from './userService'
 
-export const productApis = { getProducts, createProduct };
+export const itemApis = { getItems, createItem };
 export const userApis = { getUsers, getUserByUsername, createUser, authenticateUser, verifySession, logout };
