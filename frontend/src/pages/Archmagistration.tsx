@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import { itemApis, userApis } from '../services/servatorium';
 import { useRequestState } from '../utils/hooksUtils';
 import { NewItemForm } from '../components/Forms/NewItemForm';
+import { NewEquipmentForm } from '../components/Forms/NewEquipmentForm';
 import { NewUserForm } from '../components/Forms/NewUserForm';
 
 const useItemsRequests = () => {
@@ -88,6 +89,7 @@ const Archmagistration = () => {
       {users && <UsersTable users={users}/>}
       <hr />
       <NewItemForm onSubmit={onSubmitItem} />
+      <NewEquipmentForm onSubmit={console.log} />
     </Page>
   )
 }
