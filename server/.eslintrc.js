@@ -21,6 +21,8 @@ module.exports = {
     'no-multi-spaces': 2,
     'no-useless-return': 2,
     // Stylistic Rules
+    'array-bracket-newline': [2, { 'multiline': true, 'minItems': 3 }],
+    'array-element-newline': [2, { 'multiline': true, 'minItems': 3 }],
     'array-bracket-spacing': [2, 'always', { 'singleValue': false }],
     'brace-style': [2, '1tbs'],
     'comma-dangle': [2, 'always-multiline'],

@@ -30,7 +30,9 @@ export class User implements UserType {
   public password!: string;
 
   constructor ({
-    id, username, password,
+    id,
+    username,
+    password,
   }: UserType) {
     this.id = id;
     this.username = username;
