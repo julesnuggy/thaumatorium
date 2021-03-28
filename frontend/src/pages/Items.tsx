@@ -5,7 +5,7 @@ import Item from '../components/Item/Item';
 import { itemApis } from '../services/servatorium';
 import { useRequestState } from '../utils/hooksUtils';
 
-import styles from './Items.module.scss';
+import styles from './common.module.scss';
 
 const useItemsRequests = () => {
   const getItemsData = useCallback(() =>  itemApis.getItems(), []);
@@ -22,7 +22,7 @@ const Items = () => {
   const { data } = useItemsRequests();
   return (
     <Page title="Items">
-      <div className={styles.itemsContainer}>
+      <div className={styles.container}>
         {data?.map((item, idx) => (
           <Item
             key={`${item.title}_${idx}`}
