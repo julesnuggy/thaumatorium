@@ -1,6 +1,5 @@
 import {
   Body,
-  Path,
   Controller,
   Delete,
   Get,

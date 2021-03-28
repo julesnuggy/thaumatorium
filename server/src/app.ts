@@ -1,5 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+
+/* eslint-disable @typescript-eslint/no-var-requires */
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 

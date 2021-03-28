@@ -21,7 +21,7 @@ const pool = mysql.createPool({
 
 export const promisePool = pool.promise();
 
-const verifyDatabaseExists = async (pool: Pool) => {
+const verifyDatabaseExists = async (pool: Pool): Promise<void> => {
   try {
     await pool.promise().query("SELECT 1");
   } catch (err) {
@@ -29,7 +29,7 @@ const verifyDatabaseExists = async (pool: Pool) => {
   }
 };
 
-const initialiseDatabase = async (connection: Connection, databaseName: string) => {
+const initialiseDatabase = async (connection: Connection, databaseName: string): Promise<void> => {
   try {
     await connection.promise().execute(`CREATE DATABASE IF NOT EXISTS ${databaseName}`);
     console.log(`Verification for database [${databaseName}] completed`);
@@ -105,7 +105,7 @@ const createSessionTable = `
   );
 `;
 
-const initialiseTables = async () => {
+const initialiseTables = async (): Promise<void> => {
   try {
     await promisePool.execute(createItemsTable).catch(err => console.log(err));
     await promisePool.execute(createEquipmentTable).catch(err => console.log(err));
@@ -118,7 +118,7 @@ const initialiseTables = async () => {
   }
 };
 
-export const getDatabasePool = async () => {
+export const getDatabasePool = async (): Promise<void> => {
   await initialiseDatabase(connection, process.env.DB_NAME || "thaum_test");
   await initialiseTables();
   await verifyDatabaseExists(pool);

@@ -13,6 +13,7 @@ export class SessionRepository {
   };
 
   public getSession = async (userId: string): Promise<Session | null> => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [rows]: any = await promisePool.query(
       'SELECT * FROM session WHERE userId = (?) LIMIT 1',
       [userId]
@@ -24,6 +25,7 @@ export class SessionRepository {
   };
 
   public verifySession = async (sessionId: string): Promise<Session | null> => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [rows]: any = await promisePool.query(
       'SELECT * FROM session WHERE id = (?) LIMIT 1',
       [sessionId]

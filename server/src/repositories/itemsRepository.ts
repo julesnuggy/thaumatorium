@@ -12,7 +12,7 @@ export class ItemsRepository {
     await promisePool.query(
       'INSERT INTO items (title, description, type, itemType, imageName, stock) VALUES (?, ?, ?, ?, ?, ?)',
       [title, description, type, itemType, imageName, stock])
-      .then(([rows]:  any) => console.log(`Created new item with ID: ${rows.insertId}`))
+      .then(() => console.log('Added new item to database!'))
       .catch(err => console.error(err));
   }
 }
