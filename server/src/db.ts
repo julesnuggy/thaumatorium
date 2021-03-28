@@ -52,8 +52,8 @@ const createItemsTable = `
   );
 `;
 
-const createEquipmentsTable = `
-  CREATE TABLE IF NOT EXISTS equipments
+const createEquipmentTable = `
+  CREATE TABLE IF NOT EXISTS equipment
   (
     id              VARCHAR(36) not null unique,
     title           VARCHAR(255) not null,
@@ -81,7 +81,7 @@ const createEquipmentStatsTable = `
     physEva     INT,
     speed       INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (equipmentId) REFERENCES equipments(id)
+    FOREIGN KEY (equipmentId) REFERENCES equipment(id)
   );
 `;
 
@@ -108,7 +108,7 @@ const createSessionTable = `
 const initialiseTables = async () => {
   try {
     await promisePool.execute(createItemsTable).catch(err => console.log(err));
-    await promisePool.execute(createEquipmentsTable).catch(err => console.log(err));
+    await promisePool.execute(createEquipmentTable).catch(err => console.log(err));
     await promisePool.execute(createEquipmentStatsTable).catch(err => console.log(err));
     await promisePool.execute(createUsersTable).catch(err => console.log(err));
     await promisePool.execute(createSessionTable).catch(err => console.log(err));
