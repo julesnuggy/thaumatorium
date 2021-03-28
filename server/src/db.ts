@@ -47,7 +47,41 @@ const createItemsTable = `
     imageName   VARCHAR(255),
     stock       INT,
     type        VARCHAR(255),
+    itemType    VARCHAR(255),
     PRIMARY KEY (id)
+  );
+`;
+
+const createEquipmentTable = `
+  CREATE TABLE IF NOT EXISTS equipment
+  (
+    id              VARCHAR(36) not null unique,
+    title           VARCHAR(255) not null,
+    description     VARCHAR(255),
+    imageName       VARCHAR(255),
+    stock           INT,
+    type            VARCHAR(255),
+    equipmentType   VARCHAR(255),
+    PRIMARY KEY (id)
+  );
+`;
+
+const createEquipmentStatsTable = `
+  CREATE TABLE IF NOT EXISTS equipmentStats
+  (
+    id          VARCHAR(36) not null unique,
+    equipmentId VARCHAR(36) not null unique,
+    magAtk      INT,
+    magDef      INT,
+    magAcc      INT,
+    magEva      INT,
+    physAtk     INT,
+    physDef     INT,
+    physAcc     INT,
+    physEva     INT,
+    speed       INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (equipmentId) REFERENCES equipment(id)
   );
 `;
 
@@ -74,6 +108,8 @@ const createSessionTable = `
 const initialiseTables = async () => {
   try {
     await promisePool.execute(createItemsTable).catch(err => console.log(err));
+    await promisePool.execute(createEquipmentTable).catch(err => console.log(err));
+    await promisePool.execute(createEquipmentStatsTable).catch(err => console.log(err));
     await promisePool.execute(createUsersTable).catch(err => console.log(err));
     await promisePool.execute(createSessionTable).catch(err => console.log(err));
     console.log("Validated database tables.");

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 
 import Page from '../components/Page/Page';
-import Item from '../components/Item/Item';
+import ProductCard from '../components/ProductCard/ProductCard';
 import { itemApis } from '../services/servatorium';
 import { useRequestState } from '../utils/hooksUtils';
 
-import styles from './Items.module.scss';
+import styles from './common.module.scss';
 
 const useItemsRequests = () => {
   const getItemsData = useCallback(() =>  itemApis.getItems(), []);
@@ -22,14 +22,14 @@ const Items = () => {
   const { data } = useItemsRequests();
   return (
     <Page title="Items">
-      <div className={styles.itemsContainer}>
+      <div className={styles.container}>
         {data?.map((item, idx) => (
-          <Item
+          <ProductCard
             key={`${item.title}_${idx}`}
             title={item.title}
             imageName={item.imageName}
             description={item.description}
-            type={item.type}
+            type={item.itemType}
             stock={item.stock}
           />
         ))}

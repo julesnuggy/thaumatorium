@@ -10,7 +10,7 @@ type FormProps = {
 
 export const NewItemForm = ({ onSubmit }: FormProps) => {
   const titleRef = React.createRef();
-  const initialValues: Item = ({ title: '', description: '', type: '', imageName: '', stock: 0 });
+  const initialValues: Item = ({ title: '', description: '', type: 'ITEM', itemType: '', imageName: '', stock: 0 });
 
   const handleSubmit = async (values: Item, { resetForm }) => {
     await onSubmit(values);
@@ -32,8 +32,8 @@ export const NewItemForm = ({ onSubmit }: FormProps) => {
             <Field name="description" title="Description" />
           </div>
           <div className={styles.formItem}>
-            <label htmlFor="type">Type</label>
-            <Field name="type" title="Type" />
+            <label htmlFor="itemType">Type</label>
+            <Field name="itemType" title="Type" />
           </div>
           <div className={styles.formItem}>
             <label htmlFor="imageName">Image Name</label>
