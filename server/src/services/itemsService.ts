@@ -1,5 +1,8 @@
-import { ItemRequest, ItemResponse } from '../models/Item';
-import { ItemsRepository } from "../repositories/itemsRepository";
+import {
+  ItemRequest,
+  ItemResponse, 
+} from '../models/Item';
+import { ItemsRepository } from '../repositories/itemsRepository';
 
 export class ItemsService {
   private repository = new ItemsRepository();

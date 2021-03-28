@@ -6,8 +6,11 @@ import {
   Route,
   SuccessResponse,
 } from 'tsoa';
-import { ItemRequest, ItemResponse } from '../models/Item';
-import { ItemsService } from "../services/itemsService";
+import {
+  ItemRequest,
+  ItemResponse, 
+} from '../models/Item';
+import { ItemsService } from '../services/itemsService';
 
 @Route('items')
 export class ItemsController extends Controller {

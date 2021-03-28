@@ -1,5 +1,8 @@
 import { IBaseProduct } from './BaseProduct';
-import { EquipmentType, ProductType } from '../enums/products';
+import {
+  EquipmentType,
+  ProductType, 
+} from '../enums/products';
 
 export interface EquipmentRequest extends IBaseProduct {
   id?: string;

@@ -7,7 +7,7 @@ export class SessionRepository {
     if (!existingSession) {
       await promisePool.query(
         'INSERT INTO session (id, userId) VALUES (?, ?)',
-        [session.id, session.userId]
+        [ session.id, session.userId ]
       );
     }
   };

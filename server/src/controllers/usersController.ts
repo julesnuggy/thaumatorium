@@ -9,7 +9,11 @@ import {
   SuccessResponse,
 } from 'tsoa';
 import { Request as ExpressRequest } from 'express';
-import { UserAuthenticatedResponse, UserRequest, UserResponse } from '../models/User';
+import {
+  UserAuthenticatedResponse,
+  UserRequest,
+  UserResponse, 
+} from '../models/User';
 import { UsersService } from '../services/usersService';
 
 @Route('users')
@@ -38,7 +42,7 @@ export class UsersController extends Controller {
     this.setStatus(201);
     return {
       isAuthenticated,
-      sessionId
+      sessionId,
     };
   }
 

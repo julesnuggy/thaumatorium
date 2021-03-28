@@ -11,14 +11,12 @@ import { errorHandler } from './middleware/errorHandler';
 export const app = express();
 
 app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
+  bodyParser.urlencoded({ extended: true })
 );
 app.use(bodyParser.json());
 app.use(cors({
   credentials : true,
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000',
 }));
 app.use(cookieParser());
 

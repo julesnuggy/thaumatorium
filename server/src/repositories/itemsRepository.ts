@@ -1,4 +1,7 @@
-import { ItemRequest, ItemResponse } from '../models/Item';
+import {
+  ItemRequest,
+  ItemResponse, 
+} from '../models/Item';
 import { promisePool } from '../db'
 
 export class ItemsRepository {
@@ -8,10 +11,12 @@ export class ItemsRepository {
   }
 
   public createItem = async (params: ItemRequest): Promise<void> => {
-    const { title, description, type, itemType, imageName, stock } = params;
+    const {
+      title, description, type, itemType, imageName, stock, 
+    } = params;
     await promisePool.query(
       'INSERT INTO items (title, description, type, itemType, imageName, stock) VALUES (?, ?, ?, ?, ?, ?)',
-      [title, description, type, itemType, imageName, stock])
+      [ title, description, type, itemType, imageName, stock ])
       .then(() => console.log('Added new item to database!'))
       .catch(err => console.error(err));
   }

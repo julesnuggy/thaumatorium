@@ -4,7 +4,7 @@ import { getDatabasePool } from './db';
 const port = process.env.PORT || 3001;
 
 getDatabasePool()
-  .then(() =>  console.log("Successfully connected to the database."))
+  .then(() => console.log('Successfully connected to the database.'))
   .catch((err) => {
     throw new Error(err);
   });

@@ -1,12 +1,15 @@
-import dotenv from "dotenv";
-import mysql, { Connection, Pool } from "mysql2";
+import dotenv from 'dotenv';
+import mysql, {
+  Connection,
+  Pool, 
+} from 'mysql2';
 
 dotenv.config();
 
 const commonConfig = {
   host: `${process.env.DB_HOST}`,
   user: `${process.env.DB_USER}`,
-  password: `${process.env.DB_PASSWORD}`
+  password: `${process.env.DB_PASSWORD}`,
 };
 
 const connection = mysql.createConnection(commonConfig);
@@ -16,14 +19,14 @@ const pool = mysql.createPool({
   database: `${process.env.DB_NAME}`,
   waitForConnections: true,
   connectionLimit: 5,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
 export const promisePool = pool.promise();
 
 const verifyDatabaseExists = async (pool: Pool): Promise<void> => {
   try {
-    await pool.promise().query("SELECT 1");
+    await pool.promise().query('SELECT 1');
   } catch (err) {
     throw new Error(`There was an issue verifying the database:\n${err}`);
   }
@@ -112,14 +115,14 @@ const initialiseTables = async (): Promise<void> => {
     await promisePool.execute(createEquipmentStatsTable).catch(err => console.log(err));
     await promisePool.execute(createUsersTable).catch(err => console.log(err));
     await promisePool.execute(createSessionTable).catch(err => console.log(err));
-    console.log("Validated database tables.");
+    console.log('Validated database tables.');
   } catch (err) {
     throw new Error(`There was an issue validating the DB tables:\n${err}`);
   }
 };
 
 export const getDatabasePool = async (): Promise<void> => {
-  await initialiseDatabase(connection, process.env.DB_NAME || "thaum_test");
+  await initialiseDatabase(connection, process.env.DB_NAME || 'thaum_test');
   await initialiseTables();
   await verifyDatabaseExists(pool);
 };

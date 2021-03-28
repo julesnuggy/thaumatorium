@@ -1,8 +1,16 @@
 import { v4 as UUID } from 'uuid';
-import { User, UserAuthenticatedResponse, UserRequest, UserResponse } from '../models/User';
+import {
+  User,
+  UserAuthenticatedResponse,
+  UserRequest,
+  UserResponse, 
+} from '../models/User';
 import { UsersRepository } from '../repositories/usersRepository';
 import { SessionRepository } from '../repositories/sessionRepository';
-import { hashPassword, comparePasswords } from '../utils/encryptionHandler';
+import {
+  hashPassword,
+  comparePasswords, 
+} from '../utils/encryptionHandler';
 
 export class UsersService {
   private userRepository = new UsersRepository();
@@ -18,7 +26,7 @@ export class UsersService {
     const userProperties = {
       id: UUID(),
       username,
-      password: hashedPassword
+      password: hashedPassword,
     }
     const user = new User(userProperties)
 
@@ -35,13 +43,13 @@ export class UsersService {
       if (existingSession) {
         return {
           isAuthenticated,
-          sessionId: existingSession.id
+          sessionId: existingSession.id,
         };
       } else {
         const sessionId = UUID();
         const session = {
           id: sessionId,
-          userId: userPassword.id
+          userId: userPassword.id,
         };
         await this.sessionRepository.createSession(session)
           .catch((err) => {
@@ -50,7 +58,7 @@ export class UsersService {
 
         return {
           isAuthenticated,
-          sessionId
+          sessionId,
         };
       }
     }
