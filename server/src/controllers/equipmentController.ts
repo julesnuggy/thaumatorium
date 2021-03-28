@@ -7,11 +7,11 @@ import {
   SuccessResponse,
 } from 'tsoa';
 import { EquipmentRequest, EquipmentResponse } from '../models/Equipment';
-import { EquipmentsService } from '../services/equipmentsService';
+import { EquipmentService } from '../services/equipmentService';
 
 @Route('equipment')
 export class ProductsController extends Controller {
-  private service = new EquipmentsService();
+  private service = new EquipmentService();
 
   @Get()
   public async getProducts(): Promise<EquipmentResponse[]> {

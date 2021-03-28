@@ -1,7 +1,7 @@
 import { promisePool } from '../db'
 import { EquipmentRequest, EquipmentResponse } from '../models/Equipment';
 
-export class EquipmentsRepository {
+export class EquipmentRepository {
   public getEquipment = async (): Promise<EquipmentResponse[]> => {
     const [rows] = await promisePool.query('SELECT * FROM equipments');
     return rows as EquipmentResponse[];

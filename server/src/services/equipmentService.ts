@@ -1,10 +1,10 @@
 import { v4 as UUID } from 'uuid';
 
 import { EquipmentRequest, EquipmentResponse } from '../models/Equipment';
-import { EquipmentsRepository } from "../repositories/equipmentsRepository";
+import { EquipmentRepository } from "../repositories/equipmentRepository";
 
-export class EquipmentsService {
-  private repository = new EquipmentsRepository();
+export class EquipmentService {
+  private repository = new EquipmentRepository();
 
   public getEquipment = (): Promise<EquipmentResponse[]> => {
     return this.repository.getEquipment();
