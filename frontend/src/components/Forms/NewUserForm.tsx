@@ -1,6 +1,13 @@
-import React from "react";
-import { Field, Form, Formik } from "formik";
-import { User, UserFormValues } from "../../models/User";
+import React from 'react';
+import {
+  Field,
+  Form,
+  Formik, 
+} from 'formik';
+import {
+  User,
+  UserFormValues, 
+} from '../../models/User';
 
 import styles from './forms-common.module.scss';
 
@@ -8,13 +15,21 @@ type FormProps = {
   onSubmit: (values: User) => void;
 }
 
-export const NewUserForm = ({ onSubmit }: FormProps) => {
+export const NewUserForm = ({ onSubmit }: FormProps): React.FC => {
   const usernameRef = React.createRef();
   const passwordRef = React.createRef();
-  const initialValues: UserFormValues = ({ username: '', password: '', passwordConfirmation: '' });
+  const initialValues: UserFormValues = ({
+    username: '',
+    password: '',
+    passwordConfirmation: '', 
+  });
 
   const handleSubmit = async (values: UserFormValues, { resetForm }) => {
-    const { username, password, passwordConfirmation } = values;
+    const {
+      username,
+      password,
+      passwordConfirmation,
+    } = values;
 
     if (password !== passwordConfirmation) {
       alert('Passwords do not match!');
@@ -23,7 +38,7 @@ export const NewUserForm = ({ onSubmit }: FormProps) => {
 
     const newUser: User = {
       username,
-      password
+      password,
     };
 
     await onSubmit(newUser);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Icon from "../Icon/Icon";
+import Icon from '../Icon/Icon';
 
 import styles from './ProductCard.module.scss';
 
@@ -21,15 +21,21 @@ const useProductCount = (stock: number) => {
   return {
     count,
     increaseCount,
-    decreaseCount
+    decreaseCount,
   }
 }
 
-const ProductCard = ({ title, imageName, description, type, stock }: props): React.FC => {
+const ProductCard = ({
+  title,
+  imageName,
+  description,
+  type,
+  stock,
+}: props): React.FC => {
   const {
     count,
     increaseCount,
-    decreaseCount
+    decreaseCount,
   } = useProductCount(stock);
 
   return (
@@ -38,7 +44,7 @@ const ProductCard = ({ title, imageName, description, type, stock }: props): Rea
         {title}
       </div>
       <div className={styles.image}>
-        <Icon name={imageName}/>
+        <Icon name={imageName} />
       </div>
       <div className={styles.description}>
         {description}

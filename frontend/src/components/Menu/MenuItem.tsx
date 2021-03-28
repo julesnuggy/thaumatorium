@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Icon, { ICON_SIZE } from "../Icon/Icon";
+import Icon, { ICON_SIZE } from '../Icon/Icon';
 
 import styles from './Menu.module.scss';
 
@@ -13,14 +13,21 @@ type props = {
   onFocus: () => void;
 }
 
-const MenuItem = ({ iconName, title, subtitle, isSelected, onClick, onFocus }: props): React.FC => (
+const MenuItem = ({
+  iconName,
+  title,
+  subtitle,
+  isSelected,
+  onClick,
+  onFocus,
+}: props): React.FC => (
   <div className={styles.menuItemContainer}>
     <div className={styles.cursor}>
-      {isSelected && (<Icon name="pulsingOrb" size={ICON_SIZE.SMALL}/>)}
+      {isSelected && (<Icon name="pulsingOrb" size={ICON_SIZE.SMALL} />)}
     </div>
     <button className={styles.menuItem} onClick={onClick} onFocus={onFocus} onPointerOver={onFocus}>
       <div className={styles.icon}>
-        <Icon name={iconName} size={ICON_SIZE.SMALL}/>
+        <Icon name={iconName} size={ICON_SIZE.SMALL} />
       </div>
       <div className={styles.itemText}>
         <div className={styles.title}>

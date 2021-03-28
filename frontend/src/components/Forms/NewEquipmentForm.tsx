@@ -1,7 +1,14 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import {
+  Field,
+  Form,
+  Formik, 
+} from 'formik';
 import { Equipment } from '../../models/Equipment';
-import { EquipmentType, ProductType } from '../../enums/products';
+import {
+  EquipmentType,
+  ProductType, 
+} from '../../enums/products';
 
 import styles from './forms-common.module.scss';
 
@@ -11,20 +18,41 @@ type FormProps = {
   success: boolean;
 }
 
-const EquipmentTypeOptions = () => {
-  const options = [<option placeholder="Select one..." selected disabled value="">Select one...</option>];
+const EquipmentTypeOptions = (): React.FC => {
+  const options = [
+    <option
+      key="selectOne"
+      placeholder="Select one..."
+      selected
+      disabled
+      value=""
+    >
+      Select one...
+    </option>,
+  ];
   for (const type in EquipmentType) {
-    options.push(<option>{type}</option>)
+    options.push(<option key={type}>{type}</option>)
   }
 
   return (
-    <>{options}</>
+    options
   );
 }
 
-export const NewEquipmentForm = ({ onSubmit, error, success }: FormProps) => {
+export const NewEquipmentForm = ({
+  onSubmit,
+  error,
+  success,
+}: FormProps): React.FC => {
   const titleRef = React.createRef();
-  const initialValues: Equipment = ({ title: '', description: '', type: ProductType.EQUIPMENT, equipmentType: '', imageName: '', stock: 0 });
+  const initialValues: Equipment = ({
+    title: '',
+    description: '',
+    type: ProductType.EQUIPMENT,
+    equipmentType: '',
+    imageName: '',
+    stock: 0, 
+  });
 
   const handleSubmit = async (values: Equipment, { resetForm }) => {
     await onSubmit(values);

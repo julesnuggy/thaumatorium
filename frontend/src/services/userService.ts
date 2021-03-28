@@ -1,5 +1,9 @@
 import { client } from './axiosClient';
-import { User, UserAuthenticatedResponse, UserLoginFormValues } from '../models/User';
+import {
+  User,
+  UserAuthenticatedResponse,
+  UserLoginFormValues, 
+} from '../models/User';
 
 export const usersUrl = '/users';
 
@@ -14,7 +18,7 @@ export const getUserByUsername = async (username: string): Promise<User> =>
 
 const axiosConfig = {
   withCredentials: true,
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000',
 }
 export const authenticateUser = async (userLogin: UserLoginFormValues): Promise<UserAuthenticatedResponse> =>
   client.post(`${usersUrl}/authenticate`, userLogin, axiosConfig).then(res => res.data);

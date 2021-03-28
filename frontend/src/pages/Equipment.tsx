@@ -1,6 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {
+  useCallback,
+  useEffect, 
+} from 'react';
 
-import Page from "../components/Page/Page";
+import Page from '../components/Page/Page';
 import ProductCard from '../components/ProductCard/ProductCard';
 import { equipmentApis } from '../services/servatorium';
 import { useRequestState } from '../utils/hooksUtils';
@@ -9,7 +12,12 @@ import styles from './common.module.scss';
 
 const useEquipmentRequests = () => {
   const getEquipment = useCallback(() => equipmentApis.getEquipment(), []);
-  const { loading, data, error, call } = useRequestState(getEquipment);
+  const {
+    loading,
+    data,
+    error,
+    call,
+  } = useRequestState(getEquipment);
 
   useEffect(() => {
     call()
@@ -19,11 +27,11 @@ const useEquipmentRequests = () => {
     loading,
     data,
     error,
-    call
+    call,
   };
 }
 
-const Equipment = () => {
+const Equipment = (): React.FC => {
   const { data } = useEquipmentRequests();
 
   return (

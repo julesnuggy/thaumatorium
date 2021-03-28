@@ -1,5 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import React, {
+  useState,
+  useContext, 
+} from 'react';
+import {
+  useHistory,
+  Redirect, 
+} from 'react-router-dom';
 
 import { LoginForm } from '../components/Forms/LoginForm';
 import Page from '../components/Page/Page';
@@ -10,9 +16,9 @@ type LoginProps = {
   LoginContext: React.Context
 }
 
-const Login = ({ LoginContext }: LoginProps) => {
+const Login = ({ LoginContext }: LoginProps): React.FC => {
   const history = useHistory();
-  const [isLoginValid, setIsLoginValid] = useState<boolean>();
+  const [ isLoginValid, setIsLoginValid ] = useState<boolean>();
   const { loggedInUser, setLoggedInUser } = useContext(LoginContext)
 
   const onSubmit = async (values: UserLoginFormValues) => {

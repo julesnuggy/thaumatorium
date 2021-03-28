@@ -1,4 +1,8 @@
-import { useCallback, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  useCallback,
+  useState, 
+} from 'react';
 
 export type UseRequestStateType = {
   loading: boolean;
@@ -16,30 +20,46 @@ type StateType = {
   data?: any;
 }
 
-const initialState: StateType = { loading: false, error: false, success: false };
+const initialState: StateType = {
+  loading: false,
+  error: false,
+  success: false, 
+};
 
-export const useRequestState = (givenRequest): UseRequestStateType => {
-  const [state, setState] = useState<StateType>(initialState);
+export const useRequestState = (givenRequest: () => Promise<any>): UseRequestStateType => {
+  const [ state, setState ] = useState<StateType>(initialState);
   const call = useCallback(
     (...args) => {
-      setState({ loading: true, error: false, success: false });
+      setState({
+        loading: true,
+        error: false,
+        success: false, 
+      });
       return givenRequest(...args)
         .then((result) => {
           setState({
             loading: false,
             error: false,
             data: result,
-            success: true
+            success: true,
           });
           return result;
         })
         .catch(() => {
-          setState({ loading: false, error: true, success: false });
+          setState({
+            loading: false,
+            error: true,
+            success: false, 
+          });
         });
     },
     [givenRequest]
   );
   const reset = useCallback(() => setState(initialState), []);
 
-  return { ...state, call, reset };
+  return {
+    ...state,
+    call,
+    reset, 
+  };
 };

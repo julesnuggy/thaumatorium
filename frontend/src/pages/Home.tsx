@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Page from "../components/Page/Page";
-import Menu from "../components/Menu/Menu";
+import Page from '../components/Page/Page';
+import Menu from '../components/Menu/Menu';
 
 const Home = (): React.FC => (
   <Page>

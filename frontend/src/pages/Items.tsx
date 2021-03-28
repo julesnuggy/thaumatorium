@@ -1,4 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {
+  useCallback,
+  useEffect, 
+} from 'react';
 
 import Page from '../components/Page/Page';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -8,17 +11,26 @@ import { useRequestState } from '../utils/hooksUtils';
 import styles from './common.module.scss';
 
 const useItemsRequests = () => {
-  const getItemsData = useCallback(() =>  itemApis.getItems(), []);
-  const { loading, data, error, call } = useRequestState(getItemsData)
+  const getItemsData = useCallback(() => itemApis.getItems(), []);
+  const {
+    loading,
+    data,
+    error,
+    call,
+  } = useRequestState(getItemsData)
 
   useEffect(() => {
     call();
   }, [call])
 
-  return { loading, data, error };
+  return {
+    loading,
+    data,
+    error, 
+  };
 }
 
-const Items = () => {
+const Items = (): React.FC => {
   const { data } = useItemsRequests();
   return (
     <Page title="Items">

@@ -8,26 +8,26 @@ export type NavLocations = Record<string, NavLocation>
 export const navLocations: NavLocations = {
   home: {
     name: 'Home',
-    path: '/'
+    path: '/',
   },
   items: {
     name: 'Items',
-    path: '/items'
+    path: '/items',
   },
   equipment: {
     name: 'Equipment',
-    path: '/equipment'
+    path: '/equipment',
   },
   magic: {
     name: 'Magic',
-    path: '/magic'
+    path: '/magic',
   },
   archmagistration: {
     name: 'Archmagistration',
-    path: '/archmagistration'
+    path: '/archmagistration',
   },
   login: {
     name: 'Login',
-    path: '/login'
-  }
+    path: '/login',
+  },
 }
