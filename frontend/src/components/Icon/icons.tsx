@@ -11,7 +11,7 @@ const icons = {
   manaPotion,
   pulsingOrb,
   spellbook,
-  staves
+  staves,
 };
 
 export default icons;

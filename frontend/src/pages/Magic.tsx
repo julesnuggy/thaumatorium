@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Page from "../components/Page/Page";
+import Page from '../components/Page/Page';
 
-const Magic = () => (
+const Magic = (): React.FC => (
   <Page title="Magic">
     <p>
       Magic

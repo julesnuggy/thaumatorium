@@ -1,5 +1,8 @@
 import { client } from './axiosClient';
-import { Equipment, EquipmentResponse } from '../models/Equipment';
+import {
+  Equipment,
+  EquipmentResponse, 
+} from '../models/Equipment';
 
 const equipmentUrl = '/equipment'
 

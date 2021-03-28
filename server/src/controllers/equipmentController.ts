@@ -6,7 +6,10 @@ import {
   Route,
   SuccessResponse,
 } from 'tsoa';
-import { EquipmentRequest, EquipmentResponse } from '../models/Equipment';
+import {
+  EquipmentRequest,
+  EquipmentResponse, 
+} from '../models/Equipment';
 import { EquipmentService } from '../services/equipmentService';
 
 @Route('equipment')

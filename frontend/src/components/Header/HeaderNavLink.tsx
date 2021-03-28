@@ -9,7 +9,7 @@ type NavButtonProps = {
   location: NavLocation,
 }
 
-const HeaderNavLink = ({ location }: NavButtonProps) => (
+const HeaderNavLink = ({ location }: NavButtonProps): React.FC => (
   <NavLink
     exact
     to={location.path}

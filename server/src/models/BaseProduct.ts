@@ -1,4 +1,4 @@
-import { ProductType } from "../enums/products";
+import { ProductType } from '../enums/products';
 
 export interface IBaseProduct {
   title: string;

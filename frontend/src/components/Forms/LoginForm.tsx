@@ -1,6 +1,10 @@
-import React from "react";
-import { Field, Form, Formik } from "formik";
-import { UserLoginFormValues } from "../../models/User";
+import React from 'react';
+import {
+  Field,
+  Form,
+  Formik, 
+} from 'formik';
+import { UserLoginFormValues } from '../../models/User';
 
 import styles from './forms-common.module.scss';
 
@@ -9,10 +13,13 @@ type FormProps = {
   isLoginValid: boolean
 }
 
-export const LoginForm = ({ onSubmit, isLoginValid }: FormProps) => {
+export const LoginForm = ({ onSubmit, isLoginValid }: FormProps): React.FC => {
   const usernameRef = React.createRef();
   const passwordRef = React.createRef();
-  const initialValues: UserLoginFormValues = ({ username: '', password: '' });
+  const initialValues: UserLoginFormValues = ({
+    username: '',
+    password: '', 
+  });
 
   const handleSubmit = async (values: UserLoginFormValues, { resetForm }) => {
     await onSubmit(values);

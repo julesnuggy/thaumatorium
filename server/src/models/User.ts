@@ -29,7 +29,11 @@ export class User implements UserType {
   public username!: string;
   public password!: string;
 
-  constructor ({id, username, password}: UserType) {
+  constructor ({
+    id,
+    username,
+    password,
+  }: UserType) {
     this.id = id;
     this.username = username;
     this.password = password

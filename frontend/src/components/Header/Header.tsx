@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 
 import HeaderNavLink from './HeaderNavLink';
 import { navLocations } from '../../constants/navLocations';
@@ -10,8 +10,15 @@ type HeaderProps = {
   onLogout: () => void
 }
 
-const Header = ({ LoginContext, onLogout }: HeaderProps) => {
-  const { home, items, equipment, magic, archmagistration, login } = navLocations;
+const Header = ({ LoginContext, onLogout }: HeaderProps): React.FC => {
+  const {
+    home,
+    items,
+    equipment,
+    magic,
+    archmagistration,
+    login,
+  } = navLocations;
 
   const Account = () => (
     <LoginContext.Consumer>

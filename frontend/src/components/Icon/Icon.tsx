@@ -13,18 +13,18 @@ type props = {
 
 const getSize = (size: string) => {
   switch (size) {
-    case ICON_SIZE.SMALL:
-      return styles.small;
-    case ICON_SIZE.MEDIUM:
-      return styles.medium;
-    case ICON_SIZE.LARGE:
-      return styles.large;
-    default:
-      return styles.medium;
+  case ICON_SIZE.SMALL:
+    return styles.small;
+  case ICON_SIZE.MEDIUM:
+    return styles.medium;
+  case ICON_SIZE.LARGE:
+    return styles.large;
+  default:
+    return styles.medium;
   }
 }
 
-const Icon = ({ name, size }: props) => {
+const Icon = ({ name, size }: props): React.FC => {
   const icon = icons[name];
 
   return (

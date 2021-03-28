@@ -1,5 +1,8 @@
 import { IBaseProduct } from './BaseProduct';
-import { ItemType, ProductType } from '../enums/products';
+import {
+  ItemType,
+  ProductType, 
+} from '../enums/products';
 
 export interface ItemRequest extends IBaseProduct {
   itemType: ItemType;

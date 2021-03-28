@@ -1,4 +1,8 @@
-import { UserResponse, UserPasswordResponse, UserType } from '../models/User';
+import {
+  UserResponse,
+  UserPasswordResponse,
+  UserType, 
+} from '../models/User';
 import { promisePool } from '../db'
 
 export class UsersRepository {
@@ -8,7 +12,11 @@ export class UsersRepository {
   }
 
   public getUserById = async (userId: string): Promise<UserResponse> => {
-    const [rows]: any = await promisePool.query('SELECT id, username FROM users WHERE id = ? LIMIT 1', [userId])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [rows]: any = await promisePool.query(
+      'SELECT id, username FROM users WHERE id = ? LIMIT 1',
+      [userId]
+    );
     if (rows.length < 1) {
       throw new Error(`User ${userId} was not found`);
     }
@@ -16,7 +24,11 @@ export class UsersRepository {
   }
 
   public getUserPassword = async (username: string): Promise<UserPasswordResponse> => {
-    const [rows]: any = await promisePool.query('SELECT id, password FROM users WHERE username = ? LIMIT 1', [username])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [rows]: any = await promisePool.query(
+      'SELECT id, password FROM users WHERE username = ? LIMIT 1',
+      [username]
+    );
     if (rows.length < 1) {
       throw new Error('Could not authenticate');
     }
@@ -26,7 +38,11 @@ export class UsersRepository {
   public createUser = async (user: UserType): Promise<void> => {
     await promisePool.query(
       'INSERT INTO users (id, username, password) VALUES (?, ?, ?)',
-      [user.id, user.username, user.password]
+      [
+        user.id,
+        user.username,
+        user.password, 
+      ]
     );
   }
 }

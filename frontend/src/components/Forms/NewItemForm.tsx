@@ -1,5 +1,9 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import {
+  Field,
+  Form,
+  Formik, 
+} from 'formik';
 import { Item } from '../../models/Item';
 
 import styles from './forms-common.module.scss';
@@ -8,9 +12,16 @@ type FormProps = {
   onSubmit: (values: Item) => void;
 }
 
-export const NewItemForm = ({ onSubmit }: FormProps) => {
+export const NewItemForm = ({ onSubmit }: FormProps): React.FC => {
   const titleRef = React.createRef();
-  const initialValues: Item = ({ title: '', description: '', type: 'ITEM', itemType: '', imageName: '', stock: 0 });
+  const initialValues: Item = ({
+    title: '',
+    description: '',
+    type: 'ITEM',
+    itemType: '',
+    imageName: '',
+    stock: 0, 
+  });
 
   const handleSubmit = async (values: Item, { resetForm }) => {
     await onSubmit(values);
