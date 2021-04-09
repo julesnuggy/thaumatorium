@@ -4,6 +4,7 @@ import manaPotion from '../../assets/mana-potion.png';
 import pulsingOrb from '../../assets/pulsing-orb.gif';
 import spellbook from '../../assets/spellbook-icon.png';
 import staves from '../../assets/staves-icon.png';
+import icePiercer from '../../assets/magic/ice-piercer-small.gif';
 
 const icons = {
   archmage,
@@ -12,6 +13,7 @@ const icons = {
   pulsingOrb,
   spellbook,
   staves,
+  icePiercer,
 };
 
 export default icons;
