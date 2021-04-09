@@ -1,4 +1,7 @@
-import { MagicResponse, MagicRequest } from '../models/Magic';
+import {
+  MagicResponse,
+  MagicRequest,
+} from '../models/Magic';
 import { promisePool } from '../db'
 
 export class MagicRepository {

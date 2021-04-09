@@ -1,5 +1,8 @@
 import { IBaseProduct } from './BaseProduct';
-import { MagicType, ProductType } from '../enums/products';
+import {
+  MagicType,
+  ProductType, 
+} from '../enums/products';
 
 export interface MagicRequest extends IBaseProduct {
   id?: string;

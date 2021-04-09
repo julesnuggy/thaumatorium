@@ -4,9 +4,12 @@ import {
   Get,
   Post,
   Route,
-  SuccessResponse
+  SuccessResponse,
 } from 'tsoa';
-import { MagicRequest, MagicResponse } from '../models/Magic';
+import {
+  MagicRequest,
+  MagicResponse, 
+} from '../models/Magic';
 import { MagicService } from '../services/magicService';
 
 @Route('magic')
@@ -23,5 +26,5 @@ export class MagicController extends Controller {
   public async createMagic(@Body() magic: MagicRequest): Promise<void> {
     this.setStatus (200);
     return this.service.createMagic(magic);
-}
+  }
 }

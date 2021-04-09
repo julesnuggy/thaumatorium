@@ -1,4 +1,7 @@
-import { MagicRequest, MagicResponse } from '../models/Magic';
+import {
+  MagicRequest,
+  MagicResponse, 
+} from '../models/Magic';
 import { MagicRepository } from '../repositories/magicRepository';
 
 export class MagicService {
