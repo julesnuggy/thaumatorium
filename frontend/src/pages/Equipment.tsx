@@ -43,6 +43,7 @@ const Equipment = (): React.FC => {
             title={equipment.title}
             imageName={equipment.imageName}
             description={equipment.description}
+            productType={equipment.type}
             type={equipment.equipmentType}
             stock={equipment.stock}
           />

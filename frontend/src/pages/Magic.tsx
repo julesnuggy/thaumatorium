@@ -42,6 +42,7 @@ const Magic = (): React.FC => {
             title={magic.title}
             imageName={magic.imageName}
             description={magic.description}
+            productType={magic.type}
             type={magic.magicType}
             stock={magic.stock}
           />
