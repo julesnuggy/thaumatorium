@@ -26,7 +26,7 @@ const initialState: StateType = {
   success: false, 
 };
 
-export const useRequestState = (givenRequest: () => Promise<any>): UseRequestStateType => {
+export const useRequestState = (givenRequest: (...args: any[]) => Promise<any>): UseRequestStateType => {
   const [ state, setState ] = useState<StateType>(initialState);
   const call = useCallback(
     (...args) => {
