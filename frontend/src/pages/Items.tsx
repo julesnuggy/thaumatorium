@@ -41,6 +41,7 @@ const Items = (): React.FC => {
             title={item.title}
             imageName={item.imageName}
             description={item.description}
+            productType={item.type}
             type={item.itemType}
             stock={item.stock}
           />

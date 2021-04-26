@@ -88,6 +88,20 @@ const createEquipmentStatsTable = `
   );
 `;
 
+const createMagicTable = `
+  CREATE TABLE IF NOT EXISTS magic
+  (
+    id          INT          not null auto_increment,
+    title       VARCHAR(255) not null,
+    description VARCHAR(255),
+    imageName   VARCHAR(255),
+    stock       INT,
+    type        VARCHAR(255),
+    magicType   VARCHAR(255),
+    PRIMARY KEY (id)
+  );
+`;
+
 const createUsersTable = `
   CREATE TABLE IF NOT EXISTS users
   (
@@ -115,6 +129,7 @@ const initialiseTables = async (): Promise<void> => {
     await promisePool.execute(createEquipmentStatsTable).catch(err => console.log(err));
     await promisePool.execute(createUsersTable).catch(err => console.log(err));
     await promisePool.execute(createSessionTable).catch(err => console.log(err));
+    await promisePool.execute(createMagicTable).catch(err => console.log(err));
     console.log('Validated database tables.');
   } catch (err) {
     throw new Error(`There was an issue validating the DB tables:\n${err}`);

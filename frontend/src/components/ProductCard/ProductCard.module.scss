@@ -22,6 +22,15 @@
     font-weight: bold;
   }
 
+  .magicOrbBackground {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    height: 59px;
+    width: 59px;
+    margin: 20px;
+  }
+
   .image {
     grid-area: image;
   }
