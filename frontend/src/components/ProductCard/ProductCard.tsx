@@ -40,7 +40,7 @@ const ProductCard = ({
     increaseCount,
     decreaseCount,
   } = useProductCount(stock);
-console.log('productType', productType)
+  
   return (
     <div className={styles.container}>
       <div className={styles.title}>
