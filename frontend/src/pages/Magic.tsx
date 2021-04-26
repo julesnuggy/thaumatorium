@@ -1,4 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {
+  useCallback,
+  useEffect, 
+} from 'react';
 
 import Page from '../components/Page/Page';
 import ProductCard from '../components/ProductCard/ProductCard';

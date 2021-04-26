@@ -1,5 +1,8 @@
 import { client } from './axiosClient';
-import { Magic, MagicResponse } from '../models/Magic';
+import {
+  Magic,
+  MagicResponse, 
+} from '../models/Magic';
 
 export const magicUrl = '/magic';
 
