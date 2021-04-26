@@ -20,13 +20,13 @@ import { UsersService } from '../services/usersService';
 export class UsersController extends Controller {
   private service = new UsersService();
 
-  @Get()
+  @Get('/')
   public async getUsers(): Promise<UserResponse[]> {
     return this.service.getUsers();
   }
 
   @SuccessResponse('200', 'Created')
-  @Post()
+  @Post('/')
   public async createUser(@Body() user: UserRequest): Promise<void> {
     this.setStatus(200);
     return this.service.createUser(user);
@@ -37,8 +37,9 @@ export class UsersController extends Controller {
   public async authenticateUser(
     @Body() user: UserRequest,
     @Request() req: ExpressRequest): Promise<UserAuthenticatedResponse> {
-    const { isAuthenticated, sessionId } = await this.service.authenticateUser(user);
-    sessionId && this.setSessionCookieHeaders(sessionId, req);
+    const { isAuthenticated, sessionId } = await this.service.authenticateUser(user)
+
+    isAuthenticated && sessionId && this.setSessionCookieHeaders(sessionId, req);
     this.setStatus(201);
     return {
       isAuthenticated,

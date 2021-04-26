@@ -11,6 +11,7 @@ import {
   hashPassword,
   comparePasswords, 
 } from '../utils/encryptionHandler';
+import { AuthenticationError } from '../errors/AuthenticationError';
 
 export class UsersService {
   private userRepository = new UsersRepository();
@@ -62,8 +63,7 @@ export class UsersService {
         };
       }
     }
-
-    return { isAuthenticated: false }
+    throw new AuthenticationError();
   }
 
   public verifySession = async (sessionId: string): Promise<UserResponse> => {

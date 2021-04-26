@@ -4,6 +4,7 @@ import {
   UserType, 
 } from '../models/User';
 import { promisePool } from '../db'
+import { AuthenticationError } from '../errors/AuthenticationError';
 
 export class UsersRepository {
   public getUsers = async (): Promise<UserResponse[]> => {
@@ -30,7 +31,7 @@ export class UsersRepository {
       [username]
     );
     if (rows.length < 1) {
-      throw new Error('Could not authenticate');
+      throw new AuthenticationError();
     }
     return rows[0] as UserPasswordResponse;
   }

@@ -5,6 +5,8 @@ import {
 } from 'express';
 import { ValidateError } from 'tsoa';
 
+import { AuthenticationError } from '../errors/AuthenticationError';
+
 export const errorHandler = (
   err: unknown,
   req: ExRequest,
@@ -17,6 +19,11 @@ export const errorHandler = (
       message: 'Validation Failed',
       details: err?.fields,
     });
+  }
+
+  if (err instanceof AuthenticationError) {
+    console.error(err.stack)
+    return res.status(err.status).json({ message: err.message });
   }
 
   if (err instanceof Error) {

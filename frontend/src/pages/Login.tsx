@@ -23,11 +23,11 @@ const Login = ({ LoginContext }: LoginProps): React.FC => {
 
   const onSubmit = async (values: UserLoginFormValues) => {
     const { isAuthenticated } = await userApis.authenticateUser(values)
-      .catch(() => {
+      .catch((err) => {
         setIsLoginValid(false);
-        throw new Error('Invalid username or password')
+        throw err;
       });
-    await setIsLoginValid(isAuthenticated);
+    setIsLoginValid(isAuthenticated);
     setLoggedInUser(values.username);
     history.push('/archmagistration');
   }
