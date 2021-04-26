@@ -2,14 +2,18 @@ import {
   useCallback,
   useEffect, 
 } from 'react';
-import { Item } from '../models/Item';
+
 import { Equipment } from '../models/Equipment';
+import { Item } from '../models/Item';
 import { User } from '../models/User';
+import { Magic } from '../models/Magic';
 import {
   equipmentApis,
   itemApis,
-  userApis, 
+  userApis,
+  magicApis,
 } from '../services/servatorium';
+
 import { useRequestState } from './hooksUtils';
 
 const useItemsRequests = () => {
@@ -72,8 +76,26 @@ const useUsersRequests = () => {
   };
 }
 
+const useMagicRequests = () => {
+  const createMagic = useCallback((magic: Magic) => magicApis.createMagic(magic), []);
+  const {
+    loading: createMagicLoading,
+    error: createMagicError,
+    success: createMagicSuccess,
+    call: callCreateMagic,
+  } = useRequestState(createMagic);
+
+  return {
+    createMagicLoading,
+    createMagicError,
+    createMagicSuccess,
+    callCreateMagic,
+  };
+}
+
 export const useArchmagistrationRequests = () => ({
   useEquipmentRequests,
   useItemsRequests,
   useUsersRequests,
+  useMagicRequests,
 });

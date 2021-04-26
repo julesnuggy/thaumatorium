@@ -1,13 +1,15 @@
 import React from 'react';
 
 import Page from '../components/Page/Page';
+import { Equipment } from '../models/Equipment';
 import { Item } from '../models/Item';
 import { User } from '../models/User';
+import { Magic } from '../models/Magic';
 import { useArchmagistrationRequests } from '../utils/archmagistrationHooks';
 import { NewItemForm } from '../components/Forms/NewItemForm';
 import { NewEquipmentForm } from '../components/Forms/NewEquipmentForm';
 import { NewUserForm } from '../components/Forms/NewUserForm';
-import { Equipment } from '../models/Equipment';
+import { NewMagicForm } from '../components/Forms/NewMagicForm';
 
 type UsersTableProps = {
   users: User[];
@@ -39,6 +41,7 @@ const Archmagistration = (): React.FC => {
     useEquipmentRequests,
     useItemsRequests,
     useUsersRequests,
+    useMagicRequests,
   } = useArchmagistrationRequests();
   const { callCreateItem } = useItemsRequests();
   const {
@@ -51,6 +54,11 @@ const Archmagistration = (): React.FC => {
     callGetUsers,
     users,
   } = useUsersRequests();
+  const {
+    createMagicError,
+    createMagicSuccess,
+    callCreateMagic,
+  } = useMagicRequests();
 
   const onSubmitUser = async (values: User) => {
     await callCreateUser(values);
@@ -65,6 +73,10 @@ const Archmagistration = (): React.FC => {
     await callCreateEquipment(values);
   }
 
+  const onSubmitMagic = async (values: Magic) => {
+    await callCreateMagic(values);
+  }
+
   return (
     <Page title="Archmagistration">
       <NewUserForm onSubmit={onSubmitUser} />
@@ -72,6 +84,7 @@ const Archmagistration = (): React.FC => {
       <hr />
       <NewItemForm onSubmit={onSubmitItem} />
       <NewEquipmentForm onSubmit={onSubmitEquipment} error={createEquipmentError} success={createEquipmentSuccess} />
+      <NewMagicForm onSubmit={onSubmitMagic} error={createMagicError} success={createMagicSuccess} />
     </Page>
   )
 }
