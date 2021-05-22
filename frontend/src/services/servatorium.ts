@@ -1,6 +1,7 @@
 import {
   getItems,
-  createItem, 
+  createItem,
+  deleteItem,
 } from './itemService';
 import {
   getEquipment,
@@ -21,7 +22,8 @@ import {
 
 export const itemApis = {
   getItems,
-  createItem, 
+  createItem,
+  deleteItem,
 };
 
 export const equipmentApis = {

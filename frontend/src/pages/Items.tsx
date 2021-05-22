@@ -12,12 +12,19 @@ import styles from './common.module.scss';
 
 const useItemsRequests = () => {
   const getItemsData = useCallback(() => itemApis.getItems(), []);
+  const deleteItemsData = useCallback((params) => itemApis.deleteItem(params), []);
   const {
     loading,
     data,
     error,
     call,
   } = useRequestState(getItemsData)
+
+  const {
+    success: deleteItemSuccess,
+    error: deleteItemError,
+    call: deleteItemCall,
+  } = useRequestState(deleteItemsData);
 
   useEffect(() => {
     call();
@@ -26,12 +33,21 @@ const useItemsRequests = () => {
   return {
     loading,
     data,
-    error, 
+    error,
+    deleteItemSuccess,
+    deleteItemError,
+    deleteItemCall,
   };
 }
 
-const Items = (): React.FC => {
-  const { data } = useItemsRequests();
+const Items = ({ isLoggedIn }: Props): React.FC => {
+  const {
+    data,
+    deleteItemSuccess,
+    deleteItemError,
+    deleteItemCall,
+  } = useItemsRequests();
+
   return (
     <Page title="Items">
       <div className={styles.container}>
