@@ -104,7 +104,7 @@ const App = (): React.FC => {
             <Home />
           </Route>
           <Route path="/items">
-            <Items />
+            <Items isLoggedIn={loggedInUser !== null} />
           </Route>
           <Route path="/equipment">
             <Equipment />

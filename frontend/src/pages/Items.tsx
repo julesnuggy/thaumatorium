@@ -10,6 +10,10 @@ import { useRequestState } from '../utils/hooksUtils';
 
 import styles from './common.module.scss';
 
+type Props = {
+  isLoggedIn: boolean;
+}
+
 const useItemsRequests = () => {
   const getItemsData = useCallback(() => itemApis.getItems(), []);
   const deleteItemsData = useCallback((params) => itemApis.deleteItem(params), []);
@@ -28,7 +32,7 @@ const useItemsRequests = () => {
 
   useEffect(() => {
     call();
-  }, [call])
+  }, [call, deleteItemSuccess])
 
   return {
     loading,
@@ -54,12 +58,15 @@ const Items = ({ isLoggedIn }: Props): React.FC => {
         {data?.map((item, idx) => (
           <ProductCard
             key={`${item.title}_${idx}`}
+            id={item.id}
             title={item.title}
             imageName={item.imageName}
             description={item.description}
             productType={item.type}
             type={item.itemType}
             stock={item.stock}
+            isLoggedIn={isLoggedIn}
+            onDeleteClick={deleteItemCall}
           />
         ))}
       </div>

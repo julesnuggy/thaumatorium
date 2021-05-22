@@ -6,12 +6,15 @@ import { ProductType } from '../../enums/products';
 import styles from './ProductCard.module.scss';
 
 type props = {
+  id: string;
   title: string;
   imageName: string;
   description: string;
   productType: string;
   type: string;
   stock: number;
+  isLoggedIn: boolean;
+  onDeleteClick: (itemId: string) => void;
 }
 
 const useProductCount = (stock: number) => {
@@ -28,12 +31,15 @@ const useProductCount = (stock: number) => {
 }
 
 const ProductCard = ({
+  id,
   title,
   imageName,
   description,
   productType,
   type,
   stock,
+  isLoggedIn,
+  onDeleteClick,
 }: props): React.FC => {
   const {
     count,
@@ -63,6 +69,9 @@ const ProductCard = ({
         <button onClick={decreaseCount}>-</button>
         <div>{count}</div>
         <button onClick={increaseCount}>+</button>
+      </div>
+      <div className={styles.adminControls}>
+        {isLoggedIn && <button className={styles.deleteButton} onClick={() => onDeleteClick(id)}>Delete</button>}
       </div>
     </div>
   );

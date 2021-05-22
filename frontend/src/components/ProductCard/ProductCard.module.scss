@@ -8,7 +8,8 @@
     "title title"
     "image description"
     "image type"
-    "stock controls";
+    "stock controls"
+    "adminControls adminControls";
   margin: 10px;
   padding: 10px;
   align-items: center;
@@ -59,5 +60,20 @@
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     text-align: center;
+  }
+
+  .adminControls {
+    grid-area: adminControls;
+    padding-top: 10px;
+
+    .deleteButton {
+      background-color: $hot-pink;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-weight: bold;
+      padding: 4px 9px;
+      cursor: pointer;
+    }
   }
 }
