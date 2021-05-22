@@ -14,4 +14,8 @@ export class ItemsService {
   public createItem = (params: ItemRequest): Promise<void> => {
     return this.repository.createItem(params);
   }
+
+  public deleteItem = (itemId: string): Promise<void> => {
+    return this.repository.deleteItem(itemId);
+  }
 }

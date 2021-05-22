@@ -32,4 +32,10 @@ export class ItemsRepository {
       .then(() => console.log('Added new item to database!'))
       .catch(err => console.error(err));
   }
+
+  public deleteItem = async (itemId: string): Promise<void> => {
+    await promisePool.query('DELETE FROM items WHERE id = ?;', [itemId])
+      .then(() => console.log(`Successfully deleted item with ID ${itemId}`))
+      .catch(err => console.error(`Failed to delete item with ID ${itemId}`, err));
+  }
 }
